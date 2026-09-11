@@ -21,7 +21,7 @@ python3 -m unittest discover -s tests -v
 python3 experiments.py
 ```
 
-Для генерации PDF установите requirements.txt и шрифты DejaVu Sans; подробности в README внутри архива.
+Для генерации PDF установите requirements.txt и шрифты Times New Roman; подробности в README внутри архива.
 
 ## Результаты
 

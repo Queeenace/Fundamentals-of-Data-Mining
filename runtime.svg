@@ -2,64 +2,64 @@
 <!DOCTYPE svg
   PUBLIC '-//W3C//DTD SVG 1.0//EN'
   'http://www.w3.org/TR/2001/REC-SVG-20010904/DTD/svg10.dtd'>
-<svg width="490" height="280" preserveAspectRatio="xMinYMin meet" viewBox="0 0 490 280" xmlns="http://www.w3.org/2000/svg" version="1.0" fill-rule="evenodd" xmlns:xlink="http://www.w3.org/1999/xlink">
+<svg width="481" height="280" preserveAspectRatio="xMinYMin meet" viewBox="0 0 481 280" xmlns="http://www.w3.org/2000/svg" version="1.0" fill-rule="evenodd" xmlns:xlink="http://www.w3.org/1999/xlink">
 	<title>...</title>
 	<desc>...</desc>
 	<clipPath id="clip">
-		<rect x="0" y="0" width="490" height="280"/>
+		<rect x="0" y="0" width="481" height="280"/>
 	</clipPath>
 	<g id="group" transform="scale(1,-1) translate(0,-280)" style="clip-path: url(#clip)">
 		<g transform="">
-			<text x="45" y="261" style="font-family: DV; font-size: 11px;fill: rgb(9%,17%,26%); stroke:none;" transform="translate(0,522) scale(1,-1)">Время, мс</text>
-			<path d="M 45,47 L 470,47 Z" style="stroke: rgb(87%,90%,93%); stroke-linecap: butt; stroke-width: 0.5;"/>
-			<text x="32.27392578125" y="44.0" style="font-family: DV; font-size: 9px;fill: rgb(9%,17%,26%); stroke:none;" transform="translate(0,88) scale(1,-1)">0</text>
-			<path d="M 45,85 L 470,85 Z" style="stroke: rgb(87%,90%,93%); stroke-linecap: butt; stroke-width: 0.5;"/>
-			<text x="32.27392578125" y="82.0" style="font-family: DV; font-size: 9px;fill: rgb(9%,17%,26%); stroke:none;" transform="translate(0,164) scale(1,-1)">2</text>
-			<path d="M 45,123 L 470,123 Z" style="stroke: rgb(87%,90%,93%); stroke-linecap: butt; stroke-width: 0.5;"/>
-			<text x="32.27392578125" y="120.0" style="font-family: DV; font-size: 9px;fill: rgb(9%,17%,26%); stroke:none;" transform="translate(0,240) scale(1,-1)">4</text>
-			<path d="M 45,161 L 470,161 Z" style="stroke: rgb(87%,90%,93%); stroke-linecap: butt; stroke-width: 0.5;"/>
-			<text x="32.27392578125" y="158.0" style="font-family: DV; font-size: 9px;fill: rgb(9%,17%,26%); stroke:none;" transform="translate(0,316) scale(1,-1)">6</text>
-			<path d="M 45,199 L 470,199 Z" style="stroke: rgb(87%,90%,93%); stroke-linecap: butt; stroke-width: 0.5;"/>
-			<text x="32.27392578125" y="196.0" style="font-family: DV; font-size: 9px;fill: rgb(9%,17%,26%); stroke:none;" transform="translate(0,392) scale(1,-1)">8</text>
-			<path d="M 45,237 L 470,237 Z" style="stroke: rgb(87%,90%,93%); stroke-linecap: butt; stroke-width: 0.5;"/>
-			<text x="26.5478515625" y="234.0" style="font-family: DV; font-size: 9px;fill: rgb(9%,17%,26%); stroke:none;" transform="translate(0,468) scale(1,-1)">10</text>
-			<path d="M 45,47 L 45,237 Z" style="stroke: rgb(9%,17%,26%); stroke-linecap: butt; stroke-width: 1;"/>
-			<path d="M 45,47 L 470,47 Z" style="stroke: rgb(9%,17%,26%); stroke-linecap: butt; stroke-width: 1;"/>
-			<path d="M 45,192.559 L 45,207.776404 Z" style="stroke: rgb(13%,40%,65%); stroke-linecap: butt; stroke-width: 1.2;"/>
-			<path d="M 41,192.559 L 49,192.559 Z" style="stroke: rgb(13%,40%,65%); stroke-linecap: butt; stroke-width: 1;"/>
-			<path d="M 41,207.776404 L 49,207.776404 Z" style="stroke: rgb(13%,40%,65%); stroke-linecap: butt; stroke-width: 1;"/>
-			<text x="34.98046875" y="215.776404" style="font-family: DV; font-size: 9px;fill: rgb(9%,17%,26%); stroke:none;" transform="translate(0,431) scale(1,-1)">7.97</text>
-			<text x="42.136962890625" y="30" style="font-family: DV; font-size: 9px;fill: rgb(9%,17%,26%); stroke:none;" transform="translate(0,60) scale(1,-1)">1</text>
-			<path d="M 105.714286,159.44675 L 105.714286,168.128154 Z" style="stroke: rgb(13%,40%,65%); stroke-linecap: butt; stroke-width: 1.2;"/>
-			<path d="M 101.714286,159.44675 L 109.714286,159.44675 Z" style="stroke: rgb(13%,40%,65%); stroke-linecap: butt; stroke-width: 1;"/>
-			<path d="M 101.714286,168.128154 L 109.714286,168.128154 Z" style="stroke: rgb(13%,40%,65%); stroke-linecap: butt; stroke-width: 1;"/>
-			<text x="95.69475446428571" y="176.128154" style="font-family: DV; font-size: 9px;fill: rgb(9%,17%,26%); stroke:none;" transform="translate(0,352) scale(1,-1)">6.17</text>
-			<text x="102.85124860491071" y="30" style="font-family: DV; font-size: 9px;fill: rgb(9%,17%,26%); stroke:none;" transform="translate(0,60) scale(1,-1)">3</text>
-			<path d="M 166.428571,154.488548 L 166.428571,164.632971 Z" style="stroke: rgb(13%,40%,65%); stroke-linecap: butt; stroke-width: 1.2;"/>
-			<path d="M 162.428571,154.488548 L 170.428571,154.488548 Z" style="stroke: rgb(13%,40%,65%); stroke-linecap: butt; stroke-width: 1;"/>
-			<path d="M 162.428571,164.632971 L 170.428571,164.632971 Z" style="stroke: rgb(13%,40%,65%); stroke-linecap: butt; stroke-width: 1;"/>
-			<text x="156.40904017857142" y="172.632971" style="font-family: DV; font-size: 9px;fill: rgb(9%,17%,26%); stroke:none;" transform="translate(0,345) scale(1,-1)">5.91</text>
-			<text x="163.56553431919642" y="30" style="font-family: DV; font-size: 9px;fill: rgb(9%,17%,26%); stroke:none;" transform="translate(0,60) scale(1,-1)">5</text>
-			<path d="M 318.214286,151.317923 L 318.214286,162.071125 Z" style="stroke: rgb(13%,40%,65%); stroke-linecap: butt; stroke-width: 1.2;"/>
-			<path d="M 314.214286,151.317923 L 322.214286,151.317923 Z" style="stroke: rgb(13%,40%,65%); stroke-linecap: butt; stroke-width: 1;"/>
-			<path d="M 314.214286,162.071125 L 322.214286,162.071125 Z" style="stroke: rgb(13%,40%,65%); stroke-linecap: butt; stroke-width: 1;"/>
-			<text x="308.1947544642857" y="170.071125" style="font-family: DV; font-size: 9px;fill: rgb(9%,17%,26%); stroke:none;" transform="translate(0,340) scale(1,-1)">5.71</text>
-			<text x="312.4882114955357" y="30" style="font-family: DV; font-size: 9px;fill: rgb(9%,17%,26%); stroke:none;" transform="translate(0,60) scale(1,-1)">10</text>
-			<path d="M 470,151.042404 L 470,166.300221 Z" style="stroke: rgb(13%,40%,65%); stroke-linecap: butt; stroke-width: 1.2;"/>
-			<path d="M 466,151.042404 L 474,151.042404 Z" style="stroke: rgb(13%,40%,65%); stroke-linecap: butt; stroke-width: 1;"/>
-			<path d="M 466,166.300221 L 474,166.300221 Z" style="stroke: rgb(13%,40%,65%); stroke-linecap: butt; stroke-width: 1;"/>
-			<text x="459.98046875" y="174.30022100000002" style="font-family: DV; font-size: 9px;fill: rgb(9%,17%,26%); stroke:none;" transform="translate(0,348) scale(1,-1)">5.73</text>
-			<text x="464.27392578125" y="30" style="font-family: DV; font-size: 9px;fill: rgb(9%,17%,26%); stroke:none;" transform="translate(0,60) scale(1,-1)">15</text>
-			<path d="M 45,198.350827 L 105.714286,164.165096 Z" style="stroke: rgb(13%,40%,65%); stroke-linecap: butt; stroke-width: 2;"/>
-			<path d="M 105.714286,164.165096 L 166.428571,159.243279 Z" style="stroke: rgb(13%,40%,65%); stroke-linecap: butt; stroke-width: 2;"/>
-			<path d="M 166.428571,159.243279 L 318.214286,155.516125 Z" style="stroke: rgb(13%,40%,65%); stroke-linecap: butt; stroke-width: 2;"/>
-			<path d="M 318.214286,155.516125 L 470,155.927798 Z" style="stroke: rgb(13%,40%,65%); stroke-linecap: butt; stroke-width: 2;"/>
-			<circle cx="45.0" cy="198.350827" r="3" style="stroke: rgb(13%,40%,65%); stroke-linecap: butt; stroke-width: 1; fill: rgb(13%,40%,65%); fill-rule: evenodd;"/>
-			<circle cx="105.71428571428571" cy="164.165096" r="3" style="stroke: rgb(13%,40%,65%); stroke-linecap: butt; stroke-width: 1; fill: rgb(13%,40%,65%); fill-rule: evenodd;"/>
-			<circle cx="166.42857142857142" cy="159.24327900000003" r="3" style="stroke: rgb(13%,40%,65%); stroke-linecap: butt; stroke-width: 1; fill: rgb(13%,40%,65%); fill-rule: evenodd;"/>
-			<circle cx="318.2142857142857" cy="155.51612500000002" r="3" style="stroke: rgb(13%,40%,65%); stroke-linecap: butt; stroke-width: 1; fill: rgb(13%,40%,65%); fill-rule: evenodd;"/>
-			<circle cx="470.0" cy="155.927798" r="3" style="stroke: rgb(13%,40%,65%); stroke-linecap: butt; stroke-width: 1; fill: rgb(13%,40%,65%); fill-rule: evenodd;"/>
-			<text x="215.08251953125" y="7" style="font-family: DV; font-size: 9px;fill: rgb(9%,17%,26%); stroke:none;" transform="translate(0,14) scale(1,-1)">Порог поддержки, %</text>
+			<text x="38" y="260" style="font-family: TNR; font-size: 14px;fill: rgb(0%,0%,0%); stroke:none;" transform="translate(0,520) scale(1,-1)">Время поиска, мс</text>
+			<path d="M 35,42 L 38,42 Z" style="stroke: rgb(0%,0%,0%); stroke-linecap: butt; stroke-width: 0.7;"/>
+			<text x="24.0" y="38.0" style="font-family: TNR; font-size: 14px;fill: rgb(0%,0%,0%); stroke:none;" transform="translate(0,76) scale(1,-1)">0</text>
+			<path d="M 35,77.6 L 38,77.6 Z" style="stroke: rgb(0%,0%,0%); stroke-linecap: butt; stroke-width: 0.7;"/>
+			<text x="24.0" y="73.6" style="font-family: TNR; font-size: 14px;fill: rgb(0%,0%,0%); stroke:none;" transform="translate(0,147) scale(1,-1)">2</text>
+			<path d="M 35,113.2 L 38,113.2 Z" style="stroke: rgb(0%,0%,0%); stroke-linecap: butt; stroke-width: 0.7;"/>
+			<text x="24.0" y="109.2" style="font-family: TNR; font-size: 14px;fill: rgb(0%,0%,0%); stroke:none;" transform="translate(0,218) scale(1,-1)">4</text>
+			<path d="M 35,148.8 L 38,148.8 Z" style="stroke: rgb(0%,0%,0%); stroke-linecap: butt; stroke-width: 0.7;"/>
+			<text x="24.0" y="144.8" style="font-family: TNR; font-size: 14px;fill: rgb(0%,0%,0%); stroke:none;" transform="translate(0,289) scale(1,-1)">6</text>
+			<path d="M 35,184.4 L 38,184.4 Z" style="stroke: rgb(0%,0%,0%); stroke-linecap: butt; stroke-width: 0.7;"/>
+			<text x="24.0" y="180.4" style="font-family: TNR; font-size: 14px;fill: rgb(0%,0%,0%); stroke:none;" transform="translate(0,360) scale(1,-1)">8</text>
+			<path d="M 35,220 L 38,220 Z" style="stroke: rgb(0%,0%,0%); stroke-linecap: butt; stroke-width: 0.7;"/>
+			<text x="17.0" y="216.0" style="font-family: TNR; font-size: 14px;fill: rgb(0%,0%,0%); stroke:none;" transform="translate(0,432) scale(1,-1)">10</text>
+			<path d="M 38,42 L 38,220 Z" style="stroke: rgb(0%,0%,0%); stroke-linecap: butt; stroke-width: 1;"/>
+			<path d="M 38,42 L 457,42 Z" style="stroke: rgb(0%,0%,0%); stroke-linecap: butt; stroke-width: 1;"/>
+			<path d="M 38,178.3658 L 38,192.622105 Z" style="stroke: rgb(0%,0%,0%); stroke-linecap: butt; stroke-width: 1;"/>
+			<path d="M 34,178.3658 L 42,178.3658 Z" style="stroke: rgb(0%,0%,0%); stroke-linecap: butt; stroke-width: 1;"/>
+			<path d="M 34,192.622105 L 42,192.622105 Z" style="stroke: rgb(0%,0%,0%); stroke-linecap: butt; stroke-width: 1;"/>
+			<text x="42.75" y="201.62210480000002" style="font-family: TNR; font-size: 14px;fill: rgb(0%,0%,0%); stroke:none;" transform="translate(0,403) scale(1,-1)">7,97</text>
+			<text x="34.5" y="23" style="font-family: TNR; font-size: 14px;fill: rgb(0%,0%,0%); stroke:none;" transform="translate(0,46) scale(1,-1)">1</text>
+			<path d="M 97.857143,147.34485 L 97.857143,155.477955 Z" style="stroke: rgb(0%,0%,0%); stroke-linecap: butt; stroke-width: 1;"/>
+			<path d="M 93.857143,147.34485 L 101.857143,147.34485 Z" style="stroke: rgb(0%,0%,0%); stroke-linecap: butt; stroke-width: 1;"/>
+			<path d="M 93.857143,155.477955 L 101.857143,155.477955 Z" style="stroke: rgb(0%,0%,0%); stroke-linecap: butt; stroke-width: 1;"/>
+			<text x="85.60714285714286" y="164.4779548" style="font-family: TNR; font-size: 14px;fill: rgb(0%,0%,0%); stroke:none;" transform="translate(0,328) scale(1,-1)">6,17</text>
+			<text x="94.35714285714286" y="23" style="font-family: TNR; font-size: 14px;fill: rgb(0%,0%,0%); stroke:none;" transform="translate(0,46) scale(1,-1)">3</text>
+			<path d="M 157.714286,142.699798 L 157.714286,152.20352 Z" style="stroke: rgb(0%,0%,0%); stroke-linecap: butt; stroke-width: 1;"/>
+			<path d="M 153.714286,142.699798 L 161.714286,142.699798 Z" style="stroke: rgb(0%,0%,0%); stroke-linecap: butt; stroke-width: 1;"/>
+			<path d="M 153.714286,152.20352 L 161.714286,152.20352 Z" style="stroke: rgb(0%,0%,0%); stroke-linecap: butt; stroke-width: 1;"/>
+			<text x="145.46428571428572" y="161.2035202" style="font-family: TNR; font-size: 14px;fill: rgb(0%,0%,0%); stroke:none;" transform="translate(0,322) scale(1,-1)">5,91</text>
+			<text x="154.21428571428572" y="23" style="font-family: TNR; font-size: 14px;fill: rgb(0%,0%,0%); stroke:none;" transform="translate(0,46) scale(1,-1)">5</text>
+			<path d="M 307.357143,139.729423 L 307.357143,149.803475 Z" style="stroke: rgb(0%,0%,0%); stroke-linecap: butt; stroke-width: 1;"/>
+			<path d="M 303.357143,139.729423 L 311.357143,139.729423 Z" style="stroke: rgb(0%,0%,0%); stroke-linecap: butt; stroke-width: 1;"/>
+			<path d="M 303.357143,149.803475 L 311.357143,149.803475 Z" style="stroke: rgb(0%,0%,0%); stroke-linecap: butt; stroke-width: 1;"/>
+			<text x="295.1071428571429" y="158.803475" style="font-family: TNR; font-size: 14px;fill: rgb(0%,0%,0%); stroke:none;" transform="translate(0,317) scale(1,-1)">5,71</text>
+			<text x="300.3571428571429" y="23" style="font-family: TNR; font-size: 14px;fill: rgb(0%,0%,0%); stroke:none;" transform="translate(0,46) scale(1,-1)">10</text>
+			<path d="M 457,139.471305 L 457,153.76547 Z" style="stroke: rgb(0%,0%,0%); stroke-linecap: butt; stroke-width: 1;"/>
+			<path d="M 453,139.471305 L 461,139.471305 Z" style="stroke: rgb(0%,0%,0%); stroke-linecap: butt; stroke-width: 1;"/>
+			<path d="M 453,153.76547 L 461,153.76547 Z" style="stroke: rgb(0%,0%,0%); stroke-linecap: butt; stroke-width: 1;"/>
+			<text x="444.75" y="162.7654702" style="font-family: TNR; font-size: 14px;fill: rgb(0%,0%,0%); stroke:none;" transform="translate(0,325) scale(1,-1)">5,73</text>
+			<text x="450.0" y="23" style="font-family: TNR; font-size: 14px;fill: rgb(0%,0%,0%); stroke:none;" transform="translate(0,46) scale(1,-1)">15</text>
+			<path d="M 38,183.791827 L 97.857143,151.765195 Z" style="stroke: rgb(0%,0%,0%); stroke-linecap: butt; stroke-width: 1.3;"/>
+			<path d="M 97.857143,151.765195 L 157.714286,147.15423 Z" style="stroke: rgb(0%,0%,0%); stroke-linecap: butt; stroke-width: 1.3;"/>
+			<path d="M 157.714286,147.15423 L 307.357143,143.662475 Z" style="stroke: rgb(0%,0%,0%); stroke-linecap: butt; stroke-width: 1.3;"/>
+			<path d="M 307.357143,143.662475 L 457,144.048148 Z" style="stroke: rgb(0%,0%,0%); stroke-linecap: butt; stroke-width: 1.3;"/>
+			<circle cx="38.0" cy="183.7918274" r="2.8" style="stroke: rgb(0%,0%,0%); stroke-linecap: butt; stroke-width: 1; fill: rgb(0%,0%,0%); fill-rule: evenodd;"/>
+			<circle cx="97.85714285714286" cy="151.7651952" r="2.8" style="stroke: rgb(0%,0%,0%); stroke-linecap: butt; stroke-width: 1; fill: rgb(0%,0%,0%); fill-rule: evenodd;"/>
+			<circle cx="157.71428571428572" cy="147.1542298" r="2.8" style="stroke: rgb(0%,0%,0%); stroke-linecap: butt; stroke-width: 1; fill: rgb(0%,0%,0%); fill-rule: evenodd;"/>
+			<circle cx="307.3571428571429" cy="143.66247500000003" r="2.8" style="stroke: rgb(0%,0%,0%); stroke-linecap: butt; stroke-width: 1; fill: rgb(0%,0%,0%); fill-rule: evenodd;"/>
+			<circle cx="457.0" cy="144.0481476" r="2.8" style="stroke: rgb(0%,0%,0%); stroke-linecap: butt; stroke-width: 1; fill: rgb(0%,0%,0%); fill-rule: evenodd;"/>
+			<text x="187.533203125" y="1" style="font-family: TNR; font-size: 14px;fill: rgb(0%,0%,0%); stroke:none;" transform="translate(0,2) scale(1,-1)">Порог поддержки, %</text>
 		</g>
 	</g>
 </svg>
