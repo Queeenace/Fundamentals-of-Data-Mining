@@ -61,10 +61,11 @@ python3 -m pip install -r requirements.txt
 python3 build_report.py --repo-url https://github.com/OWNER/REPOSITORY
 ```
 
-Для кириллицы нужны DejaVuSans.ttf и DejaVuSans-Bold.ttf: установите шрифты
-DejaVu Sans или передайте `--font-dir /path/to/fonts`.
+Для отчёта нужны Times New Roman.ttf и Times New Roman Bold.ttf: установите
+Times New Roman или передайте `--font-dir /path/to/fonts`.
+Весь текст, таблицы и подписи набираются размером 14 пунктов. Оформление чёрно-белое.
 Отчёт: `output/pdf/apriori_report.pdf`; векторные рисунки: `figures/`.
-При запуске без `--repo-url` PDF содержит локальную ссылку и явное предупреждение,
-что публикация ещё не завершена. Перед сдачей нужно пересобрать его с реальным URL.
+По умолчанию PDF ссылается на репозиторий Queeenace/Fundamentals-of-Data-Mining.
+Для другого репозитория передайте его адрес через `--repo-url`.
 
 Источник алгоритма: [Agrawal, Srikant, VLDB 1994](https://rsrikant.com/papers/vldb94.pdf).

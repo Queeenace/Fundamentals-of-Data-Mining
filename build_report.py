@@ -1,180 +1,211 @@
-"""Build vector charts and a Russian PDF report from saved experiment results."""
+"""Сборка отчёта: Times New Roman, 14 пунктов, чёрно-белое оформление."""
 import argparse
 import json
-import os
 from pathlib import Path
 from xml.sax.saxutils import escape
+
 from reportlab.lib import colors
-from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
+from reportlab.lib.enums import TA_CENTER, TA_JUSTIFY
+from reportlab.lib.pagesizes import A4
+from reportlab.lib.styles import ParagraphStyle
 from reportlab.pdfbase import pdfmetrics
 from reportlab.pdfbase.ttfonts import TTFont
-from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer, Table, TableStyle, PageBreak
+from reportlab.platypus import (
+    SimpleDocTemplate, Paragraph, Spacer, Table, TableStyle, PageBreak, KeepTogether,
+)
 from reportlab.graphics.shapes import Drawing, Line, String, Rect, Circle
 from reportlab.graphics import renderPDF, renderSVG
 
 ROOT = Path(__file__).resolve().parent
-BLUE = colors.HexColor('#2266A8')
-INK = colors.HexColor('#172D43')
-TEAL = colors.HexColor('#20958F')
-ORANGE = colors.HexColor('#E49739')
+BLACK = colors.black
 
 
 def fonts(directory=None):
-    candidates = [Path(directory)] if directory else [
-        ROOT / 'fonts', Path('/usr/share/fonts/truetype/dejavu'),
-        Path.home() / '.cache/codex-runtimes/codex-primary-runtime/dependencies/native/libreoffice-headless/libreoffice/LibreOfficeDev.app/Contents/Resources/fonts/truetype']
-    for folder in candidates:
-        if (folder / 'DejaVuSans.ttf').exists():
-            pdfmetrics.registerFont(TTFont('DV', str(folder / 'DejaVuSans.ttf')))
-            pdfmetrics.registerFont(TTFont('DV-Bold', str(folder / 'DejaVuSans-Bold.ttf')))
-            pdfmetrics.registerFontFamily('DV', normal='DV', bold='DV-Bold', italic='DV', boldItalic='DV-Bold')
-            return
-    raise RuntimeError('Install DejaVu Sans or pass --font-dir.')
+    # Используем настоящий Times New Roman с поддержкой кириллицы.
+    folders = [Path(directory)] if directory else [
+        ROOT / 'fonts', Path('/System/Library/Fonts/Supplemental'),
+        Path('C:/Windows/Fonts'),
+        Path('/usr/share/fonts/truetype/msttcorefonts'),
+    ]
+    for folder in folders:
+        for regular, bold in [('Times New Roman.ttf', 'Times New Roman Bold.ttf'),
+                              ('times.ttf', 'timesbd.ttf'),
+                              ('Times_New_Roman.ttf', 'Times_New_Roman_Bold.ttf')]:
+            if (folder / regular).exists() and (folder / bold).exists():
+                pdfmetrics.registerFont(TTFont('TNR', str(folder / regular)))
+                pdfmetrics.registerFont(TTFont('TNR-Bold', str(folder / bold)))
+                pdfmetrics.registerFontFamily('TNR', normal='TNR', bold='TNR-Bold',
+                                             italic='TNR', boldItalic='TNR-Bold')
+                return
+    raise RuntimeError('Укажите --font-dir с файлами Times New Roman.')
+
+
+def number(value, digits=3):
+    return f'{value:.{digits}f}'.replace('.', ',')
 
 
 def chart(rows, mode):
-    d = Drawing(490, 280)
-    x0, y0, w, h = 45, 47, 425, 190
+    # Линии и штриховка различают серии без использования цвета.
+    d = Drawing(481, 280)
+    x0, y0, width, height = 38, 42, 419, 178
     maximum = 10 if mode == 'time' else 200
-    def label(x, y, text, size=9, anchor='start', color=INK):
-        d.add(String(x, y, text, fontName='DV', fontSize=size, textAnchor=anchor, fillColor=color))
-    label(x0, 261, 'Время, мс' if mode == 'time' else 'Количество частых наборов', 11)
+
+    def label(x, y, text, anchor='start'):
+        d.add(String(x, y, text, fontName='TNR', fontSize=14,
+                     textAnchor=anchor, fillColor=BLACK))
+
+    def pattern(x, y, w, h, kind):
+        d.add(Rect(x, y, w, h, fillColor=BLACK if kind == 1 else colors.white,
+                   strokeColor=BLACK, strokeWidth=.7))
+        if kind == 2:
+            # Горизонтальная штриховка обозначает пары товаров.
+            for offset in range(4, int(h), 5):
+                d.add(Line(x, y + offset, x + w, y + offset,
+                           strokeColor=BLACK, strokeWidth=.6))
+
+    label(x0, 260, 'Время поиска, мс' if mode == 'time' else 'Количество наборов')
     for value in range(0, maximum + 1, 2 if mode == 'time' else 40):
-        y = y0 + h * value / maximum
-        d.add(Line(x0, y, x0 + w, y, strokeColor=colors.HexColor('#DFE6EE'), strokeWidth=.5))
-        label(x0 - 7, y - 3, str(value), anchor='end')
-    d.add(Line(x0, y0, x0, y0 + h, strokeColor=INK))
-    d.add(Line(x0, y0, x0 + w, y0, strokeColor=INK))
+        y = y0 + height * value / maximum
+        d.add(Line(x0 - 3, y, x0, y, strokeColor=BLACK, strokeWidth=.7))
+        label(x0 - 7, y - 4, str(value), 'end')
+    d.add(Line(x0, y0, x0, y0 + height, strokeColor=BLACK))
+    d.add(Line(x0, y0, x0 + width, y0, strokeColor=BLACK))
     if mode == 'time':
         points = []
         for row in rows:
-            x = x0 + (row['threshold_percent'] - 1) / 14 * w
-            y = y0 + row['median_ms'] / maximum * h
-            lo, hi = [y0 + row[key] / maximum * h for key in ['min_ms', 'max_ms']]
-            d.add(Line(x, lo, x, hi, strokeColor=BLUE, strokeWidth=1.2))
-            for yy in [lo, hi]:
-                d.add(Line(x-4, yy, x+4, yy, strokeColor=BLUE))
+            x = x0 + (row['threshold_percent'] - 1) / 14 * width
+            y = y0 + row['median_ms'] / maximum * height
+            low, high = [y0 + row[key] / maximum * height for key in ['min_ms', 'max_ms']]
+            d.add(Line(x, low, x, high, strokeColor=BLACK))
+            for end in [low, high]:
+                d.add(Line(x - 4, end, x + 4, end, strokeColor=BLACK))
             points.append((x, y))
-            label(x, hi + 8, f"{row['median_ms']:.2f}", anchor='middle')
-            label(x, y0 - 17, str(row['threshold_percent']), anchor='middle')
-        for a, b in zip(points, points[1:]):
-            d.add(Line(*a, *b, strokeColor=BLUE, strokeWidth=2))
+            label(x + 17 if row['threshold_percent'] == 1 else x,
+                  high + 9, number(row['median_ms'], 2), 'middle')
+            label(x, y0 - 19, str(row['threshold_percent']), 'middle')
+        for first, second in zip(points, points[1:]):
+            d.add(Line(*first, *second, strokeColor=BLACK, strokeWidth=1.3))
         for x, y in points:
-            d.add(Circle(x, y, 3, fillColor=BLUE, strokeColor=BLUE))
+            d.add(Circle(x, y, 2.8, fillColor=BLACK, strokeColor=BLACK))
     else:
-        for index, row in enumerate(rows):
-            center = x0 + (index + .5) * w / len(rows)
-            for length, color in [(1, BLUE), (2, TEAL), (3, ORANGE)]:
-                x = center + (length - 2) * 20 - 8
+        for i, row in enumerate(rows):
+            center = x0 + (i + .5) * width / len(rows)
+            for length in (1, 2, 3):
+                x = center + (length - 2) * 23 - 8
                 value = row['by_length'].get(str(length), 0)
-                height = value / maximum * h
-                d.add(Rect(x, y0, 16, height, fillColor=color, strokeColor=None))
-                label(x + 8, y0 + height + 5, str(value), size=8, anchor='middle')
-            label(center, y0 - 17, str(row['threshold_percent']), anchor='middle')
-        for index, (name, color) in enumerate([('1 товар', BLUE), ('2 товара', TEAL), ('3 товара', ORANGE)]):
-            x = 210 + index * 92
-            d.add(Rect(x, 254, 9, 9, fillColor=color, strokeColor=None))
-            label(x + 14, 255, name, size=8)
-    label(265, 7, 'Порог поддержки, %', anchor='middle')
+                bar_height = value / maximum * height
+                if value:
+                    pattern(x, y0, 16, bar_height, length)
+                label(x + 8, y0 + bar_height + 5, str(value), 'middle')
+            label(center, y0 - 19, str(row['threshold_percent']), 'middle')
+        for i, name in enumerate(['1 товар', '2 товара', '3 товара']):
+            x = 105 + i * 120
+            pattern(x, 235, 15, 12, i + 1)
+            label(x + 22, 235, name)
+    label(250, 1, 'Порог поддержки, %', 'middle')
     return d
 
 
 def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument('--repo-url')
+    parser.add_argument('--repo-url', default='https://github.com/Queeenace/Fundamentals-of-Data-Mining')
     parser.add_argument('--font-dir')
     args = parser.parse_args()
     fonts(args.font_dir)
-    # Берём сохранённые измерения, не повторяя эксперимент при сборке PDF.
+    # Используем прежние измерения, поскольку алгоритм не изменился.
     data = json.loads((ROOT / 'results/experiments.json').read_text())
     rows = data['summary']
-    styles = getSampleStyleSheet()
-    styles.add(ParagraphStyle(name='BodyRU', fontName='DV', fontSize=10, leading=15, spaceAfter=9, textColor=INK))
-    styles.add(ParagraphStyle(name='TitleRU', fontName='DV-Bold', fontSize=25, leading=31, spaceAfter=20, textColor=INK))
-    styles.add(ParagraphStyle(name='HeadRU', fontName='DV-Bold', fontSize=15, leading=20, spaceAfter=13, textColor=BLUE))
-    styles.add(ParagraphStyle(name='SmallRU', fontName='DV', fontSize=8, leading=12, spaceAfter=8, textColor=INK))
+    body = ParagraphStyle('Body', fontName='TNR', fontSize=14, leading=17,
+                          textColor=BLACK, alignment=TA_JUSTIFY,
+                          firstLineIndent=28, spaceAfter=6)
+    plain = ParagraphStyle('Plain', parent=body, alignment=0, firstLineIndent=0)
+    title = ParagraphStyle('Title', parent=plain, fontName='TNR-Bold',
+                           alignment=TA_CENTER, spaceAfter=18)
+    cell = ParagraphStyle('Cell', parent=plain, leading=16, spaceAfter=0)
     story = []
-    def p(text, style='BodyRU'):
-        return Paragraph(text, styles[style])
-    def add(text, style='BodyRU'):
-        story.append(p(text, style))
+
+    def add(text, style=body):
+        story.append(Paragraph(text, style))
+
     def table(values, widths):
-        t = Table([[p(str(v), 'SmallRU') for v in row] for row in values], colWidths=widths, hAlign='LEFT')
-        t.setStyle(TableStyle([('BACKGROUND', (0,0), (-1,0), colors.HexColor('#E8F0F7')),
-                               ('VALIGN', (0,0), (-1,-1), 'TOP'), ('BOTTOMPADDING', (0,0), (-1,-1), 7),
-                               ('TOPPADDING', (0,0), (-1,-1), 7), ('LINEBELOW', (0,0), (-1,-1), .4, colors.HexColor('#D5E0EA'))]))
+        # Размер текста в таблицах также равен 14 пунктам.
+        grid = [[Paragraph(str(value), cell) for value in row] for row in values]
+        t = Table(grid, colWidths=widths, repeatRows=1, hAlign='LEFT')
+        t.setStyle(TableStyle([
+            ('GRID', (0, 0), (-1, -1), .6, BLACK),
+            ('VALIGN', (0, 0), (-1, -1), 'MIDDLE'),
+            ('TOPPADDING', (0, 0), (-1, -1), 4),
+            ('BOTTOMPADDING', (0, 0), (-1, -1), 4),
+        ]))
         story.append(t)
-    add('АНАЛИЗ ПОКУПАТЕЛЬСКИХ КОРЗИН', 'SmallRU')
-    add('Поиск частых наборов<br/>алгоритмом Apriori', 'TitleRU')
-    add('Экспериментальное исследование baskets.csv<br/>11 сентября 2026 г.')
-    story.append(Spacer(1, 16))
-    add('1. Формулировка задания', 'HeadRU')
-    add('Разработать программу поиска всех непустых частых наборов объектов с помощью Apriori или его модификации. Входные параметры: файл транзакций, порог поддержки и порядок результатов: по убыванию поддержки либо лексикографически. Для каждого набора вывести состав и поддержку.')
-    add('На фиксированном наборе baskets.csv провести эксперименты с порогами 1%, 3%, 5%, 10% и 15%. Визуализировать время поиска и количество частых наборов каждой длины. Подготовить PDF с исходной постановкой, ссылкой на материалы и интерпретацией результатов.')
-    add('2. Репозиторий и материалы', 'HeadRU')
-    if args.repo_url:
-        url = escape(args.repo_url)
-        add(f'Каталог репозитория: <link href="{url}" color="#2266A8">{url}</link>.')
-    else:
-        uri = ROOT.as_uri()
-        add(f'<link href="{uri}" color="#2266A8">Открыть локальный каталог Git-репозитория AD</link>.')
-        add('Онлайн-публикация ожидает входа в GitHub. Эта локальная ссылка работает только на исходном компьютере; перед сдачей отчёта её следует заменить адресом опубликованного репозитория.', 'SmallRU')
-    add('Полный проект со структурой каталогов опубликован в архиве apriori_project.zip: apriori.py, experiments.py, build_report.py, tests/, исходный data/baskets.csv, результаты и измерения в results/, рисунки в figures/ и отчёт в output/pdf/. PDF, программа поиска и CSV также доступны отдельными файлами. Команды запуска приведены в README.md.')
+        story.append(Spacer(1, 10))
+
+    add('Поиск частых наборов объектов алгоритмом Apriori', title)
+    add('Цель работы состоит в разработке программы, которая находит часто встречающиеся сочетания товаров в покупательских корзинах. Программа должна принимать файл с данными, порог поддержки и способ сортировки результатов. Для каждого найденного набора необходимо вывести его состав и поддержку.')
+    add('По условию задания нужно провести эксперименты на файле baskets.csv при порогах 1%, 3%, 5%, 10% и 15%. Затем следует сравнить время поиска и количество частых наборов разной длины, построить диаграммы и объяснить полученные результаты.')
+    url = escape(args.repo_url)
+    add(f'Материалы работы размещены в репозитории:<br/><link href="{url}" color="black">{url}</link>.', plain)
+    add('Архив apriori_project.zip содержит исходный код, данные, тесты, полные результаты и программу для создания отчёта. PDF, файл baskets.csv и программа apriori.py также опубликованы отдельно. Команды запуска приведены в README.md.')
+    add('В исходном файле 7 501 корзина и 115 разных товаров. Каждая строка описывает одну покупку. Заголовка нет, поэтому первая строка тоже участвует в расчётах. Для чтения используется кодировка Windows-1251, а названия товаров разделены запятыми.')
+    add('При подготовке данных удаляются пробелы по краям названий и повторы товаров внутри одной корзины. Всего обнаружено 39 повторных вхождений. Такой подход позволяет учитывать факт покупки товара, а не число его единиц. Одинаковые корзины в разных строках сохраняются. Средняя длина корзины после обработки составляет 3,91 товара, максимальная достигает 20 товаров.')
+    add('Поддержка набора равна доле корзин, в которых присутствуют все входящие в него товары. Например, поддержка 5% означает, что сочетание встретилось как минимум в пяти корзинах из ста. При расчётах используется точная граница: число корзин должно быть не меньше произведения порога на общее число корзин, округлённого вверх. Поэтому для порога 1% в этом файле требуется не менее 76 корзин.')
+
     story.append(PageBreak())
-    add('3. Данные и алгоритм', 'HeadRU')
-    add(f"В файле {data['transactions']:,} транзакция и {data['unique_items']} разных товаров. Каждая строка - отдельная корзина; первая строка также является транзакцией. Разделитель - запятая, кодировка исходного файла - Windows-1251. Пустых корзин нет. Средняя длина после удаления повторов составляет {data['mean_length']:.2f} товара, максимальная - {data['max_length']}.")
-    add('Пробелы по краям названий удаляются, пустые поля игнорируются. 39 лишних повторных вхождений товаров внутри корзин удалены: поддержка отражает присутствие товара, а не число купленных единиц. Одинаковые корзины в разных строках сохраняются. Названия товаров не объединяются по смыслу.')
-    add('Для набора X абсолютная поддержка count(X) равна числу корзин, содержащих все товары X. Относительная поддержка support(X) = count(X) / N. Набор частый, если count(X) ≥ ceil(s × N), где s - заданный порог. Для точного округления используется Decimal; например, 1% от 7 501 требует не менее 76 корзин.')
-    add('Используется свойство Apriori: все подмножества частого набора тоже частые [1]. Сначала отбираются одиночные товары. Затем частые наборы длины k−1 с общим префиксом объединяются в кандидаты длины k; кандидаты с нечастым подмножеством длины k−1 отбрасываются. После подсчёта поддержки остаются частые кандидаты. Поиск прекращается при пустом очередном уровне.')
-    add('Модификация подсчёта: каждому товару сопоставляется целое число с битом для каждой содержащей его транзакции. Маска кандидата получается пересечением масок двух родительских наборов (побитовое AND), а поддержка - методом int.bit_count(). Сохраняется поуровневая генерация Apriori; готовые библиотеки поиска частых наборов не используются.')
-    add('Число кандидатов в худшем случае экспоненциально по числу товаров. Битовые пересечения обрабатывают маски из N бит; память зависит от числа масок текущего и следующего уровней. Поэтому быстрый результат на этом файле не гарантирует такую же скорость на плотных данных.')
-    add('Выход и проверка корректности', 'HeadRU')
-    add('JSON содержит items, length, count и support для каждого набора. При сортировке support сначала идут большие count, при равенстве - лексикографический порядок. Режим lex сравнивает отсортированные кортежи названий по Unicode, без языковой локали.')
-    add('Пройдены 4 теста, включая 60 сравнений со всеми подмножествами на случайных малых данных, точную границу порога, обработку CSV и сортировки. На baskets.csv результаты всех пяти порогов независимо сверены горизонтальным перебором комбинаций длины 1–3; Apriori также проверил кандидатов длины 4 и не нашёл частых наборов.')
+    add('В программе реализована модификация алгоритма Apriori. Сначала находятся частые одиночные товары, затем из них формируются пары, тройки и более длинные наборы. Если хотя бы одно подмножество кандидата оказалось нечастым, такой кандидат исключается. Это следует из свойства Apriori: каждое подмножество частого набора тоже является частым [1].')
+    add('Для ускорения подсчёта каждому товару сопоставляется битовая маска. В ней отмечены номера корзин, содержащих этот товар. Пересечение масок показывает корзины с нужным сочетанием, а подсчёт установленных битов даёт его абсолютную поддержку. Поиск заканчивается, когда очередной уровень не содержит частых наборов.')
+    add('Результат сохраняется в формате JSON. Для каждого набора указаны товары, длина, число подходящих корзин и относительная поддержка. Доступна сортировка по убыванию поддержки и лексикографическая сортировка названий. При равной поддержке также применяется лексикографический порядок.')
+    add('Корректность проверена четырьмя тестами. В их числе 60 сравнений с полным перебором на небольших случайных данных, проверка граничного порога, чтения файла и сортировки. На baskets.csv результаты всех пяти порогов дополнительно сверены прямым подсчётом сочетаний длиной от одного до трёх товаров. Расхождений не обнаружено.')
+    add(f"Эксперименты выполнены в Python {data['python']} на macOS 26.6.2, ARM64. Для каждого порога проведён один предварительный запуск, затем {data['repeats']} измерений. Порядок всех 75 измеряемых запусков перемешан с фиксированным значением seed=42. Время измерялось с помощью time.perf_counter_ns().")
+    add('В измерение входят построение битовых масок и поиск наборов. Чтение файла, сортировка, сохранение результатов и построение диаграмм выполняются отдельно. Для сравнения используется медиана 15 запусков. Минимальное и максимальное время показывают наблюдаемый разброс, но не являются доверительным интервалом.')
+    table([['Порог', 'Минимум корзин', 'Медиана, мс', 'Минимум, мс', 'Максимум, мс']] +
+          [[f"{r['threshold_percent']}%", r['minimum_count'], number(r['median_ms']),
+            number(r['min_ms']), number(r['max_ms'])] for r in rows], [57,103,107,107,107])
+
     story.append(PageBreak())
-    add('4. Постановка экспериментов', 'HeadRU')
-    add(f"Среда измерений: Python {data['python']}, {data['platform']}. Для каждого порога выполнен один прогрев и {data['repeats']} измерений. Порядок 75 запусков перемешан с seed=42. Время измерено time.perf_counter_ns(); показаны медиана и диапазон минимум–максимум.")
-    add('CSV читается один раз до измерений. Каждый запуск заново строит битовые маски и выполняет полный поиск. Чтение файла, сортировка, экспорт и построение графиков не входят в измеренное время. Это время ядра поиска, а не полное время команды. Фоновые процессы не изолировались; диапазон не является доверительным интервалом.')
-    table([['Порог', 'Мин. count', 'Медиана, мс', 'Мин.–макс., мс', 'Наборов']] +
-          [[f"{r['threshold_percent']}%", r['minimum_count'], f"{r['median_ms']:.3f}", f"{r['min_ms']:.3f}–{r['max_ms']:.3f}", r['total']] for r in rows], [58,82,100,148,102])
-    story.append(Spacer(1, 20))
-    story.append(chart(rows, 'time'))
-    add('Рисунок 1. Зависимость времени поиска от порога поддержки. Точки - медианы 15 запусков; вертикальные отрезки - минимум и максимум.', 'SmallRU')
-    add(f"При повышении порога с 1% до 15% медиана снизилась с {rows[0]['median_ms']:.2f} до {rows[-1]['median_ms']:.2f} мс (примерно в {rows[0]['median_ms']/rows[-1]['median_ms']:.2f} раза). Сокращается число кандидатов, но построение исходных масок выполняется при каждом пороге. При 10% и 15% время почти одинаково; небольшое обратное изменение медианы укладывается в наблюдаемый разброс.")
+    story.extend([chart(rows, 'time'), Spacer(1, 12)])
+    add('Рисунок 1. Время поиска при разных порогах поддержки. Точки показывают медианы, вертикальные отрезки обозначают минимальное и максимальное время.', plain)
+    add(f"При повышении порога с 1% до 15% медианное время уменьшилось с {number(rows[0]['median_ms'], 2)} до {number(rows[-1]['median_ms'], 2)} мс. Поиск стал быстрее примерно в {number(rows[0]['median_ms'] / rows[-1]['median_ms'], 2)} раза. При более высоком пороге алгоритм раньше исключает редкие товары и их сочетания, поэтому проверяет меньше кандидатов.")
+    add('При пороге 1% после предварительного отсечения проверяются 2 701 пара, 507 троек и 2 четвёрки. При пороге 15% остаётся только 10 пар, и ни одна из них не становится частой. Это объясняет сокращение объёма вычислений.')
+    add('Время при порогах 10% и 15% почти одинаково. Построение исходных масок требуется в обоих случаях, даже если дальнейший поиск короткий. Небольшое увеличение медианы при 15% укладывается в разброс измерений. Поэтому по этому отличию нельзя сделать вывод, что повышение порога замедляет алгоритм.')
+    add('Полученные значения характеризуют эту реализацию на данном компьютере. Фоновые процессы во время экспериментов не отключались. На другом устройстве время может отличаться, а для больших и плотных корзин число возможных сочетаний может существенно возрасти.')
+
     story.append(PageBreak())
-    add('5. Количество и длина частых наборов', 'HeadRU')
-    story.append(chart(rows, 'count'))
-    add('Рисунок 2. Количество частых наборов длины 1, 2 и 3 при каждом пороге. Подписи 0 обозначают отсутствие наборов соответствующей длины. Для длин 4 и более значения равны нулю при всех порогах.', 'SmallRU')
-    table([['Порог', '1 товар', '2 товара', '3 товара', 'Всего']] +
-          [[f"{r['threshold_percent']}%", *[r['by_length'].get(str(k), 0) for k in (1,2,3)], r['total']] for r in rows], [70,105,105,105,105])
-    story.append(Spacer(1, 15))
-    add('При 1% преобладают пары: 170 из 261 набора. Также найдены 17 троек. При 3% тройки исчезают, при 5% остаются лишь три пары. При 10% и 15% встречаются только одиночные товары. Чем больше товаров требуется одновременно, тем меньше или равно число подходящих корзин, поэтому длинные наборы быстрее перестают проходить порог.')
-    add('Для одного и того же файла множество результатов при большем пороге вложено в множество результатов при меньшем. Количество результатов каждой длины поэтому не может увеличиваться. В отличие от числа наборов, измеренное время не обязано строго убывать из-за накладных расходов и шума измерения.')
-    add('При 1% после отсечения проверяются 2 701 пара, 507 троек и 2 четвёрки. При 15% проверяется только 10 пар, ни одна не проходит порог. Это объясняет снижение вычислительной нагрузки. Наборы большей длины отсутствуют уже при минимальном исследованном пороге.')
+    story.extend([chart(rows, 'count'), Spacer(1, 12)])
+    add('Рисунок 2. Количество частых наборов разной длины при изменении порога поддержки.', plain)
+    table([['Порог', 'Один товар', 'Два товара', 'Три товара', 'Всего']] +
+          [[f"{r['threshold_percent']}%", *[r['by_length'].get(str(k), 0) for k in (1, 2, 3)],
+            r['total']] for r in rows], [65,104,104,104,104])
+    add('При пороге 1% найден 261 набор. Большую часть составляют пары, которых насчитывается 170. Кроме того, найдены 74 одиночных товара и 17 троек. При повышении порога до 3% тройки исчезают. При 5% остаются только три пары, а при 10% и 15% встречаются лишь одиночные товары.')
+    add('Наборы из четырёх и более товаров не найдены ни при одном исследованном пороге. Чем больше товаров должно присутствовать одновременно, тем меньше корзин обычно подходит под это условие. Поэтому длинные сочетания быстрее перестают удовлетворять требованию к поддержке.')
+    add('При повышении порога число частых наборов каждой длины не может увеличиться. Новый порог только исключает часть прежних результатов. В отличие от количества наборов, измеренное время может немного колебаться из-за текущей нагрузки компьютера.')
+
     story.append(PageBreak())
-    add('6. Интерпретация и выводы', 'HeadRU')
+    add('Чтобы пояснить смысл результатов, рассмотрим несколько наиболее частых сочетаний. В таблице указаны число корзин и относительная поддержка каждого набора.')
     examples = json.loads((ROOT / 'results/itemsets_01_support.json').read_text())
     selected = examples[:1] + [r for r in examples if r['length'] == 2][:3] + [r for r in examples if r['length'] == 3][:1]
     table([['Набор товаров', 'Корзин', 'Поддержка']] +
-          [[', '.join(r['items']), r['count'], f"{100*r['support']:.3f}%"] for r in selected], [340,65,85])
-    story.append(Spacer(1, 15))
-    add('Минеральная вода встречается в 1 788 корзинах (23,837%). Самая частая пара - макароны и минеральная вода: 459 корзин (6,119%). Поэтому она сохраняется при 5%, но не при 10%. Самая частая тройка - говяжий фарш, макароны и минеральная вода: 129 корзин (1,720%); она проходит порог 1%, но не 3%.')
-    add('Порог 1% даёт подробное описание совместных покупок ценой более длинного списка результатов и большего времени. Порог 5% выделяет наиболее распространённые пары, а 10–15% оставляет только массовые одиночные товары. Для изучения сочетаний товаров на этом файле пороги 1–5% информативнее; окончательный выбор зависит от цели анализа.')
-    add('Поддержка характеризует распространённость сочетания, но сама по себе не доказывает зависимость товаров или причинное влияние. В работе не вычислялись правила ассоциации, confidence и lift. Нет сведений о периоде наблюдения и составе покупателей, поэтому результаты описывают только предоставленные 7 501 корзину.')
-    add('Реализован параметризуемый поиск со всеми требуемыми вариантами сортировки. Эксперимент показал сокращение числа частых наборов с 261 до 5 при повышении порога с 1% до 15%. Воспроизводимость обеспечивают исходный файл, код, тесты, полные результаты и все 75 измерений времени.')
-    add('Источники и контроль данных', 'HeadRU')
-    add('[1] Agrawal R., Srikant R. Fast Algorithms for Mining Association Rules in Large Databases. VLDB, 1994, pp. 487–499. <link href="https://rsrikant.com/papers/vldb94.pdf" color="#2266A8">Текст статьи</link>.', 'SmallRU')
-    add('Источник данных: baskets.csv, предоставленный пользователем; исходный файл сохранён без изменения байтов. SHA-256:<br/>' + data['sha256'], 'SmallRU')
-    add('Все числовые результаты и рисунки построены по локальным экспериментам этой работы. Измерения времени зависят от машины и текущей нагрузки.', 'SmallRU')
-    def page(canvas, doc):
-        canvas.setFont('DV', 8)
-        canvas.setFillColor(INK)
-        canvas.drawString(52, 29, 'Apriori / baskets.csv')
-        canvas.drawRightString(543, 29, str(doc.page))
+          [[', '.join(r['items']), r['count'], number(r['support'] * 100) + '%']
+           for r in selected], [305,70,106])
+    add('Минеральная вода встречается в 1 788 корзинах, что составляет 23,837% покупок. Самая частая пара состоит из макарон и минеральной воды. Она встречается в 459 корзинах и имеет поддержку 6,119%. Поэтому эта пара остаётся в результатах при пороге 5%, но исчезает при 10%.')
+    add('Самая частая тройка включает говяжий фарш, макароны и минеральную воду. Она встречается в 129 корзинах с поддержкой 1,720%. Такое сочетание проходит порог 1%, но уже не проходит порог 3%.')
+    add('Для подробного изучения совместных покупок на этом файле подходит порог 1%. Порог 5% позволяет выделить самые распространённые пары. При порогах 10% и 15% результат описывает только популярность отдельных товаров. Выбор порога зависит от того, насколько подробные сочетания нужны для анализа.')
+    add('Поддержка показывает распространённость сочетания, но сама по себе не доказывает зависимость между товарами. Для такой оценки потребовались бы дополнительные показатели, например confidence и lift. В данной работе они не рассчитывались.')
+    add('В результате создана программа с необходимыми параметрами и двумя способами сортировки. Проведённые эксперименты показали, что повышение порога с 1% до 15% сокращает число частых наборов с 261 до 5 и уменьшает время поиска. Исходный файл, код и сохранённые измерения позволяют повторить расчёты.')
+    add('[1] Agrawal R., Srikant R. Fast Algorithms for Mining Association Rules in Large Databases. VLDB, 1994, страницы с 487 по 499. <link href="https://rsrikant.com/papers/vldb94.pdf" color="black">Текст статьи</link>.', plain)
+    add('Источник данных: файл baskets.csv, предоставленный для выполнения задания. Все таблицы и рисунки получены в ходе описанных экспериментов.', plain)
+
+    def page_number(canvas, doc):
+        # Внизу страницы остаётся только номер без дополнительного заголовка.
+        canvas.setFont('TNR', 14)
+        canvas.setFillColor(BLACK)
+        canvas.drawCentredString(A4[0] / 2, 26, str(doc.page))
+
     (ROOT / 'output/pdf').mkdir(parents=True, exist_ok=True)
-    SimpleDocTemplate(str(ROOT / 'output/pdf/apriori_report.pdf'), rightMargin=52, leftMargin=52,
-                      topMargin=45, bottomMargin=48, title='Поиск частых наборов алгоритмом Apriori', author='Vladislav').build(story, onFirstPage=page, onLaterPages=page)
-    # Экспортируем те же диаграммы отдельно в векторных форматах.
+    SimpleDocTemplate(str(ROOT / 'output/pdf/apriori_report.pdf'), pagesize=A4,
+                      leftMargin=57, rightMargin=57, topMargin=45, bottomMargin=48,
+                      title='Поиск частых наборов объектов алгоритмом Apriori',
+                      author='Vladislav').build(story, onFirstPage=page_number, onLaterPages=page_number)
+    # Отдельные рисунки совпадают с диаграммами в отчёте.
     for mode, name in [('time', 'runtime'), ('count', 'itemset_lengths')]:
         drawing = chart(rows, mode)
         renderSVG.drawToFile(drawing, str(ROOT / f'figures/{name}.svg'))
