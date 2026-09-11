@@ -1,0 +1,154 @@
+{
+  "transactions": 7501,
+  "unique_items": 115,
+  "mean_length": 3.909345420610585,
+  "max_length": 20,
+  "sha256": "049a1cb8e869cfa56a4e258e6b5efb1870a536e963deb350da4487667c3c7890",
+  "python": "3.12.14",
+  "platform": "macOS-26.6.2-arm64-arm-64bit",
+  "processor": "arm",
+  "repeats": 15,
+  "shuffle_seed": 42,
+  "verification": "Horizontal exhaustive counting through maximum frequent length matched all thresholds.",
+  "summary": [
+    {
+      "threshold_percent": 1,
+      "minimum_count": 76,
+      "median_ms": 7.965833,
+      "min_ms": 7.661,
+      "max_ms": 8.461916,
+      "total": 261,
+      "by_length": {
+        "1": 74,
+        "2": 170,
+        "3": 17
+      },
+      "levels": [
+        {
+          "length": 1,
+          "candidates": 115,
+          "frequent": 74
+        },
+        {
+          "length": 2,
+          "candidates": 2701,
+          "frequent": 170
+        },
+        {
+          "length": 3,
+          "candidates": 507,
+          "frequent": 17
+        },
+        {
+          "length": 4,
+          "candidates": 2,
+          "frequent": 0
+        }
+      ]
+    },
+    {
+      "threshold_percent": 3,
+      "minimum_count": 226,
+      "median_ms": 6.166584,
+      "min_ms": 5.91825,
+      "max_ms": 6.375166,
+      "total": 55,
+      "by_length": {
+        "1": 36,
+        "2": 19
+      },
+      "levels": [
+        {
+          "length": 1,
+          "candidates": 115,
+          "frequent": 36
+        },
+        {
+          "length": 2,
+          "candidates": 630,
+          "frequent": 19
+        },
+        {
+          "length": 3,
+          "candidates": 17,
+          "frequent": 0
+        }
+      ]
+    },
+    {
+      "threshold_percent": 5,
+      "minimum_count": 376,
+      "median_ms": 5.907541,
+      "min_ms": 5.657292,
+      "max_ms": 6.191209,
+      "total": 28,
+      "by_length": {
+        "1": 25,
+        "2": 3
+      },
+      "levels": [
+        {
+          "length": 1,
+          "candidates": 115,
+          "frequent": 25
+        },
+        {
+          "length": 2,
+          "candidates": 300,
+          "frequent": 3
+        },
+        {
+          "length": 3,
+          "candidates": 0,
+          "frequent": 0
+        }
+      ]
+    },
+    {
+      "threshold_percent": 10,
+      "minimum_count": 751,
+      "median_ms": 5.711375,
+      "min_ms": 5.490417,
+      "max_ms": 6.056375,
+      "total": 7,
+      "by_length": {
+        "1": 7
+      },
+      "levels": [
+        {
+          "length": 1,
+          "candidates": 115,
+          "frequent": 7
+        },
+        {
+          "length": 2,
+          "candidates": 21,
+          "frequent": 0
+        }
+      ]
+    },
+    {
+      "threshold_percent": 15,
+      "minimum_count": 1126,
+      "median_ms": 5.733042,
+      "min_ms": 5.475916,
+      "max_ms": 6.278959,
+      "total": 5,
+      "by_length": {
+        "1": 5
+      },
+      "levels": [
+        {
+          "length": 1,
+          "candidates": 115,
+          "frequent": 5
+        },
+        {
+          "length": 2,
+          "candidates": 10,
+          "frequent": 0
+        }
+      ]
+    }
+  ]
+}
