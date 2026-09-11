@@ -22,16 +22,18 @@ def main():
     results = ROOT / 'results'
     results.mkdir(exist_ok=True)
     for threshold in thresholds:
-        mine(baskets, f'{threshold}%')  # One warm-up per threshold.
+        mine(baskets, f'{threshold}%')  # Один прогрев перед измерениями.
     schedule = thresholds * repeats
+    # Перемешиваем запуски, чтобы уменьшить влияние порядка порогов.
     random.Random(42).shuffle(schedule)
     timings = {s: [] for s in thresholds}
     for threshold in schedule:
+        # Измеряем только построение масок и поиск частых наборов.
         start = time.perf_counter_ns()
         found, levels = mine(baskets, f'{threshold}%')
         timings[threshold].append((time.perf_counter_ns() - start) / 1e6)
     summary = []
-    # Independent horizontal counting of ALL combinations up to maximum found length.
+    # Независимо считаем комбинации товаров прямым перебором корзин.
     all_found, _ = mine(baskets, '1%')
     maximum = max(map(len, all_found), default=0)
     brute = Counter(items for basket in baskets for k in range(1, maximum + 1)
@@ -46,6 +48,7 @@ def main():
                         'median_ms': statistics.median(values), 'min_ms': min(values),
                         'max_ms': max(values), 'total': len(found),
                         'by_length': dict(sorted(lengths.items())), 'levels': levels})
+        # Сохраняем полный результат в обоих вариантах сортировки.
         for order in ['support', 'lex']:
             (results / f'itemsets_{threshold:02d}_{order}.json').write_text(
                 json.dumps(result_rows(found, len(baskets), order), ensure_ascii=False, indent=2) + '\n', encoding='utf-8')

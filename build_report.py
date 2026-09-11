@@ -85,6 +85,7 @@ def main():
     parser.add_argument('--font-dir')
     args = parser.parse_args()
     fonts(args.font_dir)
+    # Берём сохранённые измерения, не повторяя эксперимент при сборке PDF.
     data = json.loads((ROOT / 'results/experiments.json').read_text())
     rows = data['summary']
     styles = getSampleStyleSheet()
@@ -173,6 +174,7 @@ def main():
     (ROOT / 'output/pdf').mkdir(parents=True, exist_ok=True)
     SimpleDocTemplate(str(ROOT / 'output/pdf/apriori_report.pdf'), rightMargin=52, leftMargin=52,
                       topMargin=45, bottomMargin=48, title='Поиск частых наборов алгоритмом Apriori', author='Vladislav').build(story, onFirstPage=page, onLaterPages=page)
+    # Экспортируем те же диаграммы отдельно в векторных форматах.
     for mode, name in [('time', 'runtime'), ('count', 'itemset_lengths')]:
         drawing = chart(rows, mode)
         renderSVG.drawToFile(drawing, str(ROOT / f'figures/{name}.svg'))

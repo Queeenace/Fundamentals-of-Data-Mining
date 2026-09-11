@@ -8,7 +8,7 @@ from pathlib import Path
 
 
 def parse_support(value):
-    """Accept a fraction (0.03) or a percentage (3%)."""
+    """Читаем порог как долю (0.03) или процент (3%)."""
     try:
         s = str(value).strip()
         result = Decimal(s[:-1]) / 100 if s.endswith('%') else Decimal(s)
@@ -29,7 +29,7 @@ def read_baskets(path, encoding='auto'):
     else:
         text = raw.decode(encoding)
     import io
-    # No header. Ignore physically blank rows; preserve repeated transactions.
+    # Заголовка нет. Убираем повторы товаров, сохраняя отдельные покупки.
     rows = [frozenset(x.strip() for x in row if x.strip())
             for row in csv.reader(io.StringIO(text))]
     baskets = [row for row in rows if row]
@@ -48,12 +48,15 @@ def mine(baskets, support):
     n = len(baskets)
     if not n:
         raise ValueError('Dataset contains no baskets.')
+    # Округляем вверх: набор должен достигать заданной доли корзин.
     minimum = int((support * n).to_integral_value(rounding=ROUND_CEILING))
     masks = {}
+    # Каждый бит показывает присутствие товара в конкретной корзине.
     for index, basket in enumerate(baskets):
         bit = 1 << index
         for item in set(basket):
             masks[item] = masks.get(item, 0) | bit
+    # Начинаем с частых одиночных товаров.
     level = {(item,): mask for item, mask in masks.items()
              if mask.bit_count() >= minimum}
     diagnostics = [{'length': 1, 'candidates': len(masks), 'frequent': len(level)}]
@@ -67,10 +70,13 @@ def mine(baskets, support):
             for right in keys[i + 1:]:
                 if left[:-1] != right[:-1]:
                     break
+                # Объединяем наборы с одинаковым префиксом.
                 candidate = left + (right[-1],)
+                # Отсекаем кандидата, если хотя бы одно подмножество нечастое.
                 if any(subset not in level for subset in combinations(candidate, k - 1)):
                     continue
                 candidates += 1
+                # Пересечение масок даёт корзины со всеми товарами кандидата.
                 mask = level[left] & level[right]
                 count = mask.bit_count()
                 if count >= minimum:
@@ -86,6 +92,7 @@ def mine(baskets, support):
 def result_rows(found, n, order='support'):
     if order not in ('support', 'lex'):
         raise ValueError('Unknown ordering.')
+    # При равной поддержке используем лексикографический порядок.
     keys = sorted(found, key=(lambda x: (-found[x], x)) if order == 'support' else None)
     return [{'items': list(key), 'length': len(key), 'count': found[key],
              'support': found[key] / n} for key in keys]
