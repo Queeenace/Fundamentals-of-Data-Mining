@@ -14,6 +14,14 @@ from apriori import mine, read_baskets, result_rows
 ROOT = Path(__file__).resolve().parent
 
 
+def generate_charts(summary, output_dir=ROOT / 'figures'):
+    """Строим графики времени и числа наборов по сохранённым результатам."""
+    from plots import save_charts
+
+    # Рисунки сохраняются в SVG и PDF, чтобы их можно было открыть отдельно.
+    save_charts(summary, output_dir)
+
+
 def main():
     source = ROOT / 'data/baskets.csv'
     baskets = read_baskets(source)
@@ -65,6 +73,8 @@ def main():
                 'verification': 'Horizontal exhaustive counting through maximum frequent length matched all thresholds.',
                 'summary': summary}
     (results / 'experiments.json').write_text(json.dumps(metadata, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
+    # Графики создаются сразу после эксперимента из тех же итоговых чисел.
+    generate_charts(summary)
     print(json.dumps(metadata, ensure_ascii=False, indent=2))
 
 
