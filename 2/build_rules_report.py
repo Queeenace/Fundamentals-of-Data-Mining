@@ -19,7 +19,10 @@ BLACK = colors.black
 
 def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument('--repo-url', default='https://github.com/Queeenace/Fundamentals-of-Data-Mining')
+    parser.add_argument(
+        '--repo-url',
+        default='https://github.com/Queeenace/Fundamentals-of-Data-Mining/tree/main/2',
+    )
     parser.add_argument('--font-dir')
     args = parser.parse_args()
     fonts(args.font_dir)
