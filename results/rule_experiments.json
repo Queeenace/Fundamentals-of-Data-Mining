@@ -1,0 +1,94 @@
+{
+  "transactions": 7501,
+  "support_percent": 1,
+  "confidence_thresholds_percent": [
+    20,
+    25,
+    30,
+    35,
+    40,
+    45,
+    50
+  ],
+  "repeats": 100,
+  "shuffle_seed": 42,
+  "python": "3.12.14",
+  "platform": "macOS-26.6.2-arm64-arm-64bit",
+  "frequent_itemsets": 261,
+  "maximum_itemset_length": 3,
+  "apriori_levels": [
+    {
+      "length": 1,
+      "candidates": 115,
+      "frequent": 74
+    },
+    {
+      "length": 2,
+      "candidates": 2701,
+      "frequent": 170
+    },
+    {
+      "length": 3,
+      "candidates": 507,
+      "frequent": 17
+    },
+    {
+      "length": 4,
+      "candidates": 2,
+      "frequent": 0
+    }
+  ],
+  "analysis_confidence_percent": 40,
+  "analysis_rule_count": 19,
+  "summary": [
+    {
+      "confidence_percent": 20,
+      "median_ms": 0.42010400000000003,
+      "min_ms": 0.398708,
+      "max_ms": 0.556291,
+      "rules": 164
+    },
+    {
+      "confidence_percent": 25,
+      "median_ms": 0.3837505,
+      "min_ms": 0.365375,
+      "max_ms": 0.480625,
+      "rules": 99
+    },
+    {
+      "confidence_percent": 30,
+      "median_ms": 0.367708,
+      "min_ms": 0.350792,
+      "max_ms": 0.596209,
+      "rules": 65
+    },
+    {
+      "confidence_percent": 35,
+      "median_ms": 0.353396,
+      "min_ms": 0.336583,
+      "max_ms": 0.527166,
+      "rules": 34
+    },
+    {
+      "confidence_percent": 40,
+      "median_ms": 0.34620850000000003,
+      "min_ms": 0.329,
+      "max_ms": 0.439542,
+      "rules": 19
+    },
+    {
+      "confidence_percent": 45,
+      "median_ms": 0.34152099999999996,
+      "min_ms": 0.323291,
+      "max_ms": 0.44675,
+      "rules": 6
+    },
+    {
+      "confidence_percent": 50,
+      "median_ms": 0.3421455,
+      "min_ms": 0.321584,
+      "max_ms": 0.44075,
+      "rules": 2
+    }
+  ]
+}

@@ -1,15 +1,17 @@
-# Частые наборы покупок: Apriori
+# Частые наборы и ассоциативные правила: Apriori
 
-Поиск всех частых наборов с поддержкой, два варианта сортировки и эксперименты на `baskets.csv`.
+Поиск частых наборов и ассоциативных правил с поддержкой и достоверностью,
+два варианта сортировки и эксперименты на `baskets.csv`.
 Python 3.10+; сам алгоритм и эксперименты используют только стандартную библиотеку.
 
 ## Запуск
 
 ```bash
-python3 apriori.py data/baskets.csv --support 3% --order support --output results/example.json
-python3 apriori.py data/baskets.csv --support 0.03 --order lex
+python3 apriori.py data/baskets.csv --support 1% --confidence 40% --order support
+python3 apriori.py data/baskets.csv --support 0.01 --confidence 0.4 --order lex --format json
 python3 -m unittest discover -s tests -v
 python3 experiments.py
+python3 rule_experiments.py
 ```
 
 `experiments.py` сразу строит две диаграммы в каталоге `figures/`. Код
@@ -17,10 +19,25 @@ python3 experiments.py
 сохранения результатов экспериментов. Для графиков нужна библиотека ReportLab
 и шрифты Times New Roman, как описано ниже.
 
-`--support`: доля (0.03) или процент (3%). Диапазон (0, 1]. `--order support`:
-поддержка по убыванию, при равенстве лексикографически. `--order lex`: сравнение
-кортежей названий по Unicode, без локали. Названия внутри наборов отсортированы.
-Выход JSON: `items`, `length`, `count` (число корзин), `support` (доля корзин).
+`--support` и `--confidence` принимают долю или процент. `--order support`
+сортирует правила по убыванию поддержки, затем достоверности. `--order lex`
+сортирует антецеденты и консеквенты лексикографически. По умолчанию выводится
+читаемый список `антецедент → консеквент`; `--format json` сохраняет наборы,
+правила и диагностические данные. Параметр `--max-rule-length 7` ограничивает
+суммарное число объектов в обеих частях правила.
+
+## Эксперименты с правилами
+
+`rule_experiments.py` фиксирует поддержку на уровне 1% и меняет порог
+достоверности от 20% до 50% с шагом 5%. Для каждого порога выполняется один
+прогрев и 100 измерений генерации и сортировки правил. Apriori запускается один
+раз до измерений, потому что частые наборы не зависят от confidence.
+
+В `results/rule_experiments.json` хранится сводка, в `rule_timings.csv` находятся
+700 отдельных измерений, а `rules_XX_support.json` и `rules_XX_lex.json`
+содержат полные списки. Для анализа выбран порог 40%; его 19 правил сохранены
+в `rules_analysis_40_support.json`. Диаграммы `rule_runtime` и `rule_count`
+создаются в каталоге `figures/`.
 
 ## Данные
 

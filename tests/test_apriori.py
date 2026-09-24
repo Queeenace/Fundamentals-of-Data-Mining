@@ -3,7 +3,8 @@ import tempfile
 import unittest
 from itertools import combinations
 from pathlib import Path
-from apriori import mine, parse_support, read_baskets, result_rows
+from apriori import (format_rules, generate_rules, mine, parse_support,
+                     read_baskets, result_rows)
 
 
 class AprioriTests(unittest.TestCase):
@@ -44,6 +45,24 @@ class AprioriTests(unittest.TestCase):
                 parse_support(value)
         with self.assertRaises(ValueError):
             mine([], '.1')
+
+    def test_association_rules(self):
+        baskets = [{'a', 'b'}, {'a', 'b'}, {'a', 'c'}, {'b', 'c'}]
+        found, _ = mine(baskets, '50%')
+        rules = generate_rules(found, len(baskets), '60%', 'support')
+        self.assertEqual([row['rule'] for row in rules], ['a → b', 'b → a'])
+        self.assertTrue(all(row['support'] == .5 for row in rules))
+        self.assertTrue(all(abs(row['confidence'] - 2 / 3) < 1e-12
+                            for row in rules))
+        self.assertIn('достоверность', format_rules(rules))
+
+    def test_rule_order_and_length_limit(self):
+        baskets = [{'a', 'b', 'c'}, {'a', 'b', 'c'}, {'a', 'b'}, {'a'}]
+        found, _ = mine(baskets, '25%')
+        lex = generate_rules(found, len(baskets), '1%', 'lex', 2)
+        self.assertTrue(all(row['total_length'] <= 2 for row in lex))
+        keys = [(row['antecedent'], row['consequent']) for row in lex]
+        self.assertEqual(keys, sorted(keys))
 
 
 if __name__ == '__main__':

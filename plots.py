@@ -105,3 +105,46 @@ def save_charts(rows, directory=ROOT / 'figures', font_dir=None):
         drawing = chart(rows, mode)
         renderSVG.drawToFile(drawing, str(directory / f"{name}.svg"))
         renderPDF.drawToFile(drawing, str(directory / f"{name}.pdf"))
+
+
+def rule_chart(rows, mode):
+    """Строим график времени или количества правил по порогу confidence."""
+    d = Drawing(481, 300)
+    x0, y0, width, height = 55, 65, 390, 175
+    values = ([row['median_ms'] for row in rows] if mode == 'time'
+              else [row['rules'] for row in rows])
+    maximum = max(values) * 1.25 if values and max(values) else 1
+
+    def label(x, y, text, anchor='start'):
+        d.add(String(x, y, text, fontName='TNR', fontSize=14,
+                     textAnchor=anchor, fillColor=BLACK))
+
+    label(x0, 278, 'Время поиска правил, мс' if mode == 'time'
+          else 'Количество найденных правил')
+    d.add(Line(x0, y0, x0, y0 + height, strokeColor=BLACK))
+    d.add(Line(x0, y0, x0 + width, y0, strokeColor=BLACK))
+    points = []
+    for index, row in enumerate(rows):
+        x = x0 + index * width / (len(rows) - 1)
+        value = row['median_ms'] if mode == 'time' else row['rules']
+        y = y0 + value / maximum * height
+        points.append((x, y))
+        label(x, y + 10, number(value, 3) if mode == 'time' else str(value), 'middle')
+        label(x, y0 - 22, str(row['confidence_percent']), 'middle')
+    for first, second in zip(points, points[1:]):
+        d.add(Line(*first, *second, strokeColor=BLACK, strokeWidth=1.3))
+    for x, y in points:
+        d.add(Circle(x, y, 3, fillColor=BLACK, strokeColor=BLACK))
+    label(250, 10, 'Порог достоверности, %', 'middle')
+    return d
+
+
+def save_rule_charts(rows, directory=ROOT / 'figures', font_dir=None):
+    """Сохраняем две диаграммы экспериментов с ассоциативными правилами."""
+    directory = Path(directory)
+    directory.mkdir(parents=True, exist_ok=True)
+    fonts(font_dir)
+    for mode, name in [('time', 'rule_runtime'), ('count', 'rule_count')]:
+        drawing = rule_chart(rows, mode)
+        renderSVG.drawToFile(drawing, str(directory / f'{name}.svg'))
+        renderPDF.drawToFile(drawing, str(directory / f'{name}.pdf'))
