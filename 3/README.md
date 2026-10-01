@@ -24,7 +24,6 @@ python3 -m venv .venv
 .venv/bin/python 3/decision_tree.py --criterion gini --train-share 0.8 --output 3/results/example_split.json
 .venv/bin/python -m unittest discover -s 3/tests -v
 .venv/bin/python 3/experiments.py
-.venv/bin/python 3/build_report.py
 ```
 
 Без `--train-share` дерево обучается на всех 32 561 строках `adult.data` и
@@ -51,7 +50,7 @@ python3 -m venv .venv
 Ветви глубже третьего уровня доступны в полном JSON.
 
 Готовый [PDF-отчёт](output/pdf/decision_tree_report.pdf) содержит задание,
-ссылку на репозиторий, рисунки и объяснение результатов. Для его пересборки
-нужен установленный Times New Roman. Основной текст набран размером 14 пунктов.
+ссылку на репозиторий, рисунки и объяснение результатов. Основной текст
+набран шрифтом Times New Roman размером 14 пунктов.
 
 Исходный набор: [UCI Adult](https://archive.ics.uci.edu/dataset/2/adult).

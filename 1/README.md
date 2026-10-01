@@ -61,16 +61,8 @@ Apriori выполняет поуровневое объединение час�
 
 ## PDF и рисунки
 
-```bash
-python3 -m pip install -r requirements.txt
-python3 build_report.py --repo-url https://github.com/Queeenace/Fundamentals-of-Data-Mining/tree/main/1
-```
-
-Для отчёта нужны Times New Roman.ttf и Times New Roman Bold.ttf: установите
-Times New Roman или передайте `--font-dir /path/to/fonts`.
 Весь текст, таблицы и подписи набираются размером 14 пунктов. Оформление чёрно-белое.
 Отчёт: `output/pdf/apriori_report.pdf`; векторные рисунки: `figures/`.
-По умолчанию PDF ссылается на каталог первой лабораторной работы в репозитории.
-Для другого репозитория передайте его адрес через `--repo-url`.
+PDF содержит ссылку на каталог первой лабораторной работы в репозитории.
 
 Источник алгоритма: [Agrawal, Srikant, VLDB 1994](https://rsrikant.com/papers/vldb94.pdf).

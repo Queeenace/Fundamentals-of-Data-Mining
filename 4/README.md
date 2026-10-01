@@ -14,7 +14,6 @@ python3 -m venv .venv
 .venv/bin/python 4/ensemble.py --technique random_forest --n-estimators 100 --train-share 0.8 --output 4/results/example.json
 .venv/bin/python -m unittest discover -s 4/tests -v
 .venv/bin/python 4/experiments.py
-.venv/bin/python 4/build_report.py
 ```
 
 Параметры `--max-depth`, `--min-leaf`, `--max-features` задают устройство леса.
@@ -36,5 +35,5 @@ python3 -m venv .venv
 Диаграмма четырёх показателей качества находится в
 `figures/forest_quality.png`. Готовый
 [PDF-отчёт](output/pdf/random_forest_report.pdf) содержит задание, ссылку на
-репозиторий, диаграмму и объяснение результатов. Для пересборки PDF нужен
-Times New Roman; основной текст набран размером 14 пунктов.
+репозиторий, диаграмму и объяснение результатов. Основной текст набран
+шрифтом Times New Roman размером 14 пунктов.

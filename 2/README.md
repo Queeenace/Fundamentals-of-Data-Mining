@@ -51,11 +51,6 @@ python3 rule_experiments.py
 
 ## PDF-отчёт
 
-```bash
-python3 -m pip install -r requirements.txt
-python3 build_rules_report.py --repo-url https://github.com/Queeenace/Fundamentals-of-Data-Mining/tree/main/2
-```
-
 Весь текст отчёта набран шрифтом Times New Roman размером 14 пунктов, цвет
 текста чёрный. Готовый файл: `output/pdf/association_rules_report.pdf`.
 
