@@ -1,0 +1,573 @@
+{
+  "criterion": "information_gain",
+  "train_count": 32561,
+  "test_count": 16281,
+  "seconds": 0.37205200000000005,
+  "quality": {
+    "accuracy": 0.8453411952582766,
+    "precision": 0.777360066833751,
+    "recall": 0.483879355174207,
+    "f1": 0.596474358974359
+  },
+  "tree": {
+    "count": 32561,
+    "positive": 7841,
+    "prediction": "<=50K",
+    "depth": 0,
+    "feature": "marital-status=Married-civ-spouse",
+    "threshold": 0.5,
+    "score": 0.15210656150745572,
+    "left": {
+      "count": 17585,
+      "positive": 1149,
+      "prediction": "<=50K",
+      "depth": 1,
+      "feature": "capital-gain",
+      "threshold": 3325.0,
+      "score": 0.05201644638289493,
+      "left": {
+        "count": 17067,
+        "positive": 815,
+        "prediction": "<=50K",
+        "depth": 2,
+        "feature": "education-num",
+        "threshold": 12.0,
+        "score": 0.02845699542282787,
+        "left": {
+          "count": 13731,
+          "positive": 329,
+          "prediction": "<=50K",
+          "depth": 3,
+          "feature": "age",
+          "threshold": 26.0,
+          "score": 0.011274121641289103,
+          "left": {
+            "count": 5414,
+            "positive": 17,
+            "prediction": "<=50K",
+            "depth": 4,
+            "feature": "age",
+            "threshold": 21.0,
+            "score": 0.0025812266675983783,
+            "left": {
+              "count": 2992,
+              "positive": 1,
+              "prediction": "<=50K",
+              "depth": 5,
+              "feature": "hours-per-week",
+              "threshold": 45.0,
+              "score": 0.001457814451039395,
+              "left": {
+                "count": 2846,
+                "positive": 0,
+                "prediction": "<=50K",
+                "depth": 6
+              },
+              "right": {
+                "count": 146,
+                "positive": 1,
+                "prediction": "<=50K",
+                "depth": 6
+              }
+            },
+            "right": {
+              "count": 2422,
+              "positive": 16,
+              "prediction": "<=50K",
+              "depth": 5,
+              "feature": "fnlwgt",
+              "threshold": 235909.36363636365,
+              "score": 0.003454779552242583,
+              "left": {
+                "count": 1688,
+                "positive": 16,
+                "prediction": "<=50K",
+                "depth": 6
+              },
+              "right": {
+                "count": 734,
+                "positive": 0,
+                "prediction": "<=50K",
+                "depth": 6
+              }
+            }
+          },
+          "right": {
+            "count": 8317,
+            "positive": 312,
+            "prediction": "<=50K",
+            "depth": 4,
+            "feature": "hours-per-week",
+            "threshold": 40.0,
+            "score": 0.011720464827135263,
+            "left": {
+              "count": 6476,
+              "positive": 151,
+              "prediction": "<=50K",
+              "depth": 5,
+              "feature": "occupation=Other-service",
+              "threshold": 0.5,
+              "score": 0.003491709346219979,
+              "left": {
+                "count": 5318,
+                "positive": 146,
+                "prediction": "<=50K",
+                "depth": 6
+              },
+              "right": {
+                "count": 1158,
+                "positive": 5,
+                "prediction": "<=50K",
+                "depth": 6
+              }
+            },
+            "right": {
+              "count": 1841,
+              "positive": 161,
+              "prediction": "<=50K",
+              "depth": 5,
+              "feature": "age",
+              "threshold": 38.0,
+              "score": 0.008681795444880291,
+              "left": {
+                "count": 953,
+                "positive": 55,
+                "prediction": "<=50K",
+                "depth": 6
+              },
+              "right": {
+                "count": 888,
+                "positive": 106,
+                "prediction": "<=50K",
+                "depth": 6
+              }
+            }
+          }
+        },
+        "right": {
+          "count": 3336,
+          "positive": 486,
+          "prediction": "<=50K",
+          "depth": 3,
+          "feature": "age",
+          "threshold": 27.0,
+          "score": 0.05332289266155166,
+          "left": {
+            "count": 993,
+            "positive": 18,
+            "prediction": "<=50K",
+            "depth": 4,
+            "feature": "hours-per-week",
+            "threshold": 37.0,
+            "score": 0.008608961261622278,
+            "left": {
+              "count": 276,
+              "positive": 0,
+              "prediction": "<=50K",
+              "depth": 5
+            },
+            "right": {
+              "count": 717,
+              "positive": 18,
+              "prediction": "<=50K",
+              "depth": 5,
+              "feature": "age",
+              "threshold": 24.0,
+              "score": 0.002883350159127468,
+              "left": {
+                "count": 293,
+                "positive": 4,
+                "prediction": "<=50K",
+                "depth": 6
+              },
+              "right": {
+                "count": 424,
+                "positive": 14,
+                "prediction": "<=50K",
+                "depth": 6
+              }
+            }
+          },
+          "right": {
+            "count": 2343,
+            "positive": 468,
+            "prediction": "<=50K",
+            "depth": 4,
+            "feature": "hours-per-week",
+            "threshold": 40.0,
+            "score": 0.03877697294453064,
+            "left": {
+              "count": 1437,
+              "positive": 180,
+              "prediction": "<=50K",
+              "depth": 5,
+              "feature": "age",
+              "threshold": 34.0,
+              "score": 0.01749855917317067,
+              "left": {
+                "count": 427,
+                "positive": 22,
+                "prediction": "<=50K",
+                "depth": 6
+              },
+              "right": {
+                "count": 1010,
+                "positive": 158,
+                "prediction": "<=50K",
+                "depth": 6
+              }
+            },
+            "right": {
+              "count": 906,
+              "positive": 288,
+              "prediction": "<=50K",
+              "depth": 5,
+              "feature": "education-num",
+              "threshold": 14.0,
+              "score": 0.02042624777766433,
+              "left": {
+                "count": 786,
+                "positive": 225,
+                "prediction": "<=50K",
+                "depth": 6
+              },
+              "right": {
+                "count": 120,
+                "positive": 63,
+                "prediction": ">50K",
+                "depth": 6
+              }
+            }
+          }
+        }
+      },
+      "right": {
+        "count": 518,
+        "positive": 334,
+        "prediction": ">50K",
+        "depth": 2,
+        "feature": "capital-gain",
+        "threshold": 7443.0,
+        "score": 0.5491013395861705,
+        "left": {
+          "count": 222,
+          "positive": 44,
+          "prediction": "<=50K",
+          "depth": 3
+        },
+        "right": {
+          "count": 296,
+          "positive": 290,
+          "prediction": ">50K",
+          "depth": 3,
+          "feature": "capital-gain",
+          "threshold": 14084.0,
+          "score": 0.011590843473047757,
+          "left": {
+            "count": 176,
+            "positive": 175,
+            "prediction": ">50K",
+            "depth": 4
+          },
+          "right": {
+            "count": 120,
+            "positive": 115,
+            "prediction": ">50K",
+            "depth": 4
+          }
+        }
+      }
+    },
+    "right": {
+      "count": 14976,
+      "positive": 6692,
+      "prediction": "<=50K",
+      "depth": 1,
+      "feature": "education-num",
+      "threshold": 12.0,
+      "score": 0.09359380392931882,
+      "left": {
+        "count": 10507,
+        "positive": 3478,
+        "prediction": "<=50K",
+        "depth": 2,
+        "feature": "capital-gain",
+        "threshold": 4386.0,
+        "score": 0.056450350233167135,
+        "left": {
+          "count": 9921,
+          "positive": 2961,
+          "prediction": "<=50K",
+          "depth": 3,
+          "feature": "education-num",
+          "threshold": 7.0,
+          "score": 0.03090169936889653,
+          "left": {
+            "count": 1526,
+            "positive": 145,
+            "prediction": "<=50K",
+            "depth": 4,
+            "feature": "age",
+            "threshold": 36.0,
+            "score": 0.011085517222042485,
+            "left": {
+              "count": 448,
+              "positive": 19,
+              "prediction": "<=50K",
+              "depth": 5,
+              "feature": "occupation=Craft-repair",
+              "threshold": 0.5,
+              "score": 0.004179139871539783,
+              "left": {
+                "count": 313,
+                "positive": 10,
+                "prediction": "<=50K",
+                "depth": 6
+              },
+              "right": {
+                "count": 135,
+                "positive": 9,
+                "prediction": "<=50K",
+                "depth": 6
+              }
+            },
+            "right": {
+              "count": 1078,
+              "positive": 126,
+              "prediction": "<=50K",
+              "depth": 5,
+              "feature": "age",
+              "threshold": 66.0,
+              "score": 0.012711353148687987,
+              "left": {
+                "count": 958,
+                "positive": 124,
+                "prediction": "<=50K",
+                "depth": 6
+              },
+              "right": {
+                "count": 120,
+                "positive": 2,
+                "prediction": "<=50K",
+                "depth": 6
+              }
+            }
+          },
+          "right": {
+            "count": 8395,
+            "positive": 2816,
+            "prediction": "<=50K",
+            "depth": 4,
+            "feature": "age",
+            "threshold": 35.0,
+            "score": 0.024828364158023475,
+            "left": {
+              "count": 2810,
+              "positive": 603,
+              "prediction": "<=50K",
+              "depth": 5,
+              "feature": "age",
+              "threshold": 24.0,
+              "score": 0.019288051384455995,
+              "left": {
+                "count": 343,
+                "positive": 19,
+                "prediction": "<=50K",
+                "depth": 6
+              },
+              "right": {
+                "count": 2467,
+                "positive": 584,
+                "prediction": "<=50K",
+                "depth": 6
+              }
+            },
+            "right": {
+              "count": 5585,
+              "positive": 2213,
+              "prediction": "<=50K",
+              "depth": 5,
+              "feature": "hours-per-week",
+              "threshold": 30.0,
+              "score": 0.018805937850601917,
+              "left": {
+                "count": 563,
+                "positive": 97,
+                "prediction": "<=50K",
+                "depth": 6
+              },
+              "right": {
+                "count": 5022,
+                "positive": 2116,
+                "prediction": "<=50K",
+                "depth": 6
+              }
+            }
+          }
+        },
+        "right": {
+          "count": 586,
+          "positive": 517,
+          "prediction": ">50K",
+          "depth": 3,
+          "feature": "capital-gain",
+          "threshold": 5178.0,
+          "score": 0.18242097650338474,
+          "left": {
+            "count": 125,
+            "positive": 67,
+            "prediction": ">50K",
+            "depth": 4
+          },
+          "right": {
+            "count": 461,
+            "positive": 450,
+            "prediction": ">50K",
+            "depth": 4,
+            "feature": "age",
+            "threshold": 53.0,
+            "score": 0.03147754323485338,
+            "left": {
+              "count": 333,
+              "positive": 332,
+              "prediction": ">50K",
+              "depth": 5,
+              "feature": "fnlwgt",
+              "threshold": 197416.18181818182,
+              "score": 0.004397371742785906,
+              "left": {
+                "count": 212,
+                "positive": 212,
+                "prediction": ">50K",
+                "depth": 6
+              },
+              "right": {
+                "count": 121,
+                "positive": 120,
+                "prediction": ">50K",
+                "depth": 6
+              }
+            },
+            "right": {
+              "count": 128,
+              "positive": 118,
+              "prediction": ">50K",
+              "depth": 5
+            }
+          }
+        }
+      },
+      "right": {
+        "count": 4469,
+        "positive": 3214,
+        "prediction": ">50K",
+        "depth": 2,
+        "feature": "capital-gain",
+        "threshold": 5178.0,
+        "score": 0.07057230702949002,
+        "left": {
+          "count": 3818,
+          "positive": 2566,
+          "prediction": ">50K",
+          "depth": 3,
+          "feature": "capital-loss",
+          "threshold": 1887.0,
+          "score": 0.032475368195785226,
+          "left": {
+            "count": 3502,
+            "positive": 2263,
+            "prediction": ">50K",
+            "depth": 4,
+            "feature": "hours-per-week",
+            "threshold": 33.0,
+            "score": 0.02139817465120275,
+            "left": {
+              "count": 321,
+              "positive": 122,
+              "prediction": "<=50K",
+              "depth": 5,
+              "feature": "hours-per-week",
+              "threshold": 21.24242424242425,
+              "score": 0.008381545946335112,
+              "left": {
+                "count": 185,
+                "positive": 62,
+                "prediction": "<=50K",
+                "depth": 6
+              },
+              "right": {
+                "count": 136,
+                "positive": 60,
+                "prediction": "<=50K",
+                "depth": 6
+              }
+            },
+            "right": {
+              "count": 3181,
+              "positive": 2141,
+              "prediction": ">50K",
+              "depth": 5,
+              "feature": "age",
+              "threshold": 28.0,
+              "score": 0.010865016049720455,
+              "left": {
+                "count": 220,
+                "positive": 100,
+                "prediction": "<=50K",
+                "depth": 6
+              },
+              "right": {
+                "count": 2961,
+                "positive": 2041,
+                "prediction": ">50K",
+                "depth": 6
+              }
+            }
+          },
+          "right": {
+            "count": 316,
+            "positive": 303,
+            "prediction": ">50K",
+            "depth": 4,
+            "feature": "workclass=Private",
+            "threshold": 0.5,
+            "score": 0.013933368040771388,
+            "left": {
+              "count": 139,
+              "positive": 129,
+              "prediction": ">50K",
+              "depth": 5
+            },
+            "right": {
+              "count": 177,
+              "positive": 174,
+              "prediction": ">50K",
+              "depth": 5
+            }
+          }
+        },
+        "right": {
+          "count": 651,
+          "positive": 648,
+          "prediction": ">50K",
+          "depth": 3,
+          "feature": "age",
+          "threshold": 54.121212121212125,
+          "score": 0.01037076649472602,
+          "left": {
+            "count": 513,
+            "positive": 513,
+            "prediction": ">50K",
+            "depth": 4
+          },
+          "right": {
+            "count": 138,
+            "positive": 135,
+            "prediction": ">50K",
+            "depth": 4
+          }
+        }
+      }
+    }
+  }
+}

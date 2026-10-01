@@ -1,0 +1,96 @@
+{
+  "data": "UCI Adult/Census Income",
+  "seed": 42,
+  "max_depth": 6,
+  "min_leaf": 120,
+  "numeric_bins": 32,
+  "full_training": [
+    {
+      "criterion": "information_gain",
+      "train_count": 32561,
+      "test_count": 16281,
+      "seconds": 0.37205200000000005,
+      "quality": {
+        "accuracy": 0.8453411952582766,
+        "precision": 0.777360066833751,
+        "recall": 0.483879355174207,
+        "f1": 0.596474358974359
+      }
+    },
+    {
+      "criterion": "gain_ratio",
+      "train_count": 32561,
+      "test_count": 16281,
+      "seconds": 0.36216487499999994,
+      "quality": {
+        "accuracy": 0.8438056630428107,
+        "precision": 0.7463137996219281,
+        "recall": 0.5132605304212169,
+        "f1": 0.6082267755353566
+      }
+    },
+    {
+      "criterion": "gini",
+      "train_count": 32561,
+      "test_count": 16281,
+      "seconds": 0.35937958400000003,
+      "quality": {
+        "accuracy": 0.8452797739696579,
+        "precision": 0.781263247138618,
+        "recall": 0.4791991679667187,
+        "f1": 0.5940370668815471
+      }
+    }
+  ],
+  "split_criterion": "gini",
+  "splits": [
+    {
+      "train_share": 0.6,
+      "train_count": 19536,
+      "test_count": 13025,
+      "seconds": 0.220811667,
+      "quality": {
+        "accuracy": 0.8449904030710172,
+        "precision": 0.7756410256410257,
+        "recall": 0.5014344915524387,
+        "f1": 0.6090997095837367
+      }
+    },
+    {
+      "train_share": 0.7,
+      "train_count": 22792,
+      "test_count": 9769,
+      "seconds": 0.254121917,
+      "quality": {
+        "accuracy": 0.8468625243115979,
+        "precision": 0.7764857881136951,
+        "recall": 0.5110544217687075,
+        "f1": 0.6164102564102564
+      }
+    },
+    {
+      "train_share": 0.8,
+      "train_count": 26048,
+      "test_count": 6513,
+      "seconds": 0.2874580420000008,
+      "quality": {
+        "accuracy": 0.8504529402732995,
+        "precision": 0.7981927710843374,
+        "recall": 0.5070153061224489,
+        "f1": 0.6201248049921997
+      }
+    },
+    {
+      "train_share": 0.9,
+      "train_count": 29304,
+      "test_count": 3257,
+      "seconds": 0.32270491700000026,
+      "quality": {
+        "accuracy": 0.854774332207553,
+        "precision": 0.8219461697722568,
+        "recall": 0.5063775510204082,
+        "f1": 0.6266771902131019
+      }
+    }
+  ]
+}

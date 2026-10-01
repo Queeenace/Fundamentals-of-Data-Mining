@@ -1,0 +1,288 @@
+{
+  "criterion": "gain_ratio",
+  "train_count": 32561,
+  "test_count": 16281,
+  "seconds": 0.36216487499999994,
+  "quality": {
+    "accuracy": 0.8438056630428107,
+    "precision": 0.7463137996219281,
+    "recall": 0.5132605304212169,
+    "f1": 0.6082267755353566
+  },
+  "tree": {
+    "count": 32561,
+    "positive": 7841,
+    "prediction": "<=50K",
+    "depth": 0,
+    "feature": "capital-gain",
+    "threshold": 7688.0,
+    "score": 0.2932343985453742,
+    "left": {
+      "count": 31706,
+      "positive": 7001,
+      "prediction": "<=50K",
+      "depth": 1,
+      "feature": "marital-status=Married-civ-spouse",
+      "threshold": 0.5,
+      "score": 0.15964848389023611,
+      "left": {
+        "count": 17289,
+        "positive": 859,
+        "prediction": "<=50K",
+        "depth": 2,
+        "feature": "education-num",
+        "threshold": 14.0,
+        "score": 0.12069379679677775,
+        "left": {
+          "count": 17036,
+          "positive": 753,
+          "prediction": "<=50K",
+          "depth": 3,
+          "feature": "education-num",
+          "threshold": 13.0,
+          "score": 0.040888527718466794,
+          "left": {
+            "count": 16367,
+            "positive": 619,
+            "prediction": "<=50K",
+            "depth": 4,
+            "feature": "hours-per-week",
+            "threshold": 40.0,
+            "score": 0.025230032362550232,
+            "left": {
+              "count": 13095,
+              "positive": 271,
+              "prediction": "<=50K",
+              "depth": 5,
+              "feature": "occupation=Prof-specialty",
+              "threshold": 0.5,
+              "score": 0.012679538919607866,
+              "left": {
+                "count": 12086,
+                "positive": 199,
+                "prediction": "<=50K",
+                "depth": 6
+              },
+              "right": {
+                "count": 1009,
+                "positive": 72,
+                "prediction": "<=50K",
+                "depth": 6
+              }
+            },
+            "right": {
+              "count": 3272,
+              "positive": 348,
+              "prediction": "<=50K",
+              "depth": 5,
+              "feature": "age",
+              "threshold": 25.0,
+              "score": 0.034060748816030266,
+              "left": {
+                "count": 637,
+                "positive": 7,
+                "prediction": "<=50K",
+                "depth": 6
+              },
+              "right": {
+                "count": 2635,
+                "positive": 341,
+                "prediction": "<=50K",
+                "depth": 6
+              }
+            }
+          },
+          "right": {
+            "count": 669,
+            "positive": 134,
+            "prediction": "<=50K",
+            "depth": 4,
+            "feature": "occupation=Exec-managerial",
+            "threshold": 0.5,
+            "score": 0.04829142781534001,
+            "left": {
+              "count": 528,
+              "positive": 80,
+              "prediction": "<=50K",
+              "depth": 5,
+              "feature": "age",
+              "threshold": 33.72727272727272,
+              "score": 0.031712721442261615,
+              "left": {
+                "count": 144,
+                "positive": 7,
+                "prediction": "<=50K",
+                "depth": 6
+              },
+              "right": {
+                "count": 384,
+                "positive": 73,
+                "prediction": "<=50K",
+                "depth": 6
+              }
+            },
+            "right": {
+              "count": 141,
+              "positive": 54,
+              "prediction": "<=50K",
+              "depth": 5
+            }
+          }
+        },
+        "right": {
+          "count": 253,
+          "positive": 106,
+          "prediction": "<=50K",
+          "depth": 3,
+          "feature": "age",
+          "threshold": 40.18181818181819,
+          "score": 0.03431140466684798,
+          "left": {
+            "count": 123,
+            "positive": 38,
+            "prediction": "<=50K",
+            "depth": 4
+          },
+          "right": {
+            "count": 130,
+            "positive": 68,
+            "prediction": ">50K",
+            "depth": 4
+          }
+        }
+      },
+      "right": {
+        "count": 14417,
+        "positive": 6142,
+        "prediction": "<=50K",
+        "depth": 2,
+        "feature": "capital-gain",
+        "threshold": 7298.0,
+        "score": 0.17628204322212934,
+        "left": {
+          "count": 14133,
+          "positive": 5858,
+          "prediction": "<=50K",
+          "depth": 3,
+          "feature": "capital-gain",
+          "threshold": 5013.0,
+          "score": 0.17707855856889992,
+          "left": {
+            "count": 13767,
+            "positive": 5497,
+            "prediction": "<=50K",
+            "depth": 4,
+            "feature": "education-num",
+            "threshold": 12.0,
+            "score": 0.09752121583994335,
+            "left": {
+              "count": 9979,
+              "positive": 2961,
+              "prediction": "<=50K",
+              "depth": 5,
+              "feature": "education-num",
+              "threshold": 7.0,
+              "score": 0.049418275504196175,
+              "left": {
+                "count": 1533,
+                "positive": 145,
+                "prediction": "<=50K",
+                "depth": 6
+              },
+              "right": {
+                "count": 8446,
+                "positive": 2816,
+                "prediction": "<=50K",
+                "depth": 6
+              }
+            },
+            "right": {
+              "count": 3788,
+              "positive": 2536,
+              "prediction": ">50K",
+              "depth": 5,
+              "feature": "capital-loss",
+              "threshold": 1887.0,
+              "score": 0.0801362902221542,
+              "left": {
+                "count": 3472,
+                "positive": 2233,
+                "prediction": ">50K",
+                "depth": 6
+              },
+              "right": {
+                "count": 316,
+                "positive": 303,
+                "prediction": ">50K",
+                "depth": 6
+              }
+            }
+          },
+          "right": {
+            "count": 366,
+            "positive": 361,
+            "prediction": ">50K",
+            "depth": 4,
+            "feature": "age",
+            "threshold": 47.0,
+            "score": 0.023384684743319444,
+            "left": {
+              "count": 242,
+              "positive": 242,
+              "prediction": ">50K",
+              "depth": 5
+            },
+            "right": {
+              "count": 124,
+              "positive": 119,
+              "prediction": ">50K",
+              "depth": 5
+            }
+          }
+        },
+        "right": {
+          "count": 284,
+          "positive": 284,
+          "prediction": ">50K",
+          "depth": 3
+        }
+      }
+    },
+    "right": {
+      "count": 855,
+      "positive": 840,
+      "prediction": ">50K",
+      "depth": 1,
+      "feature": "education-num",
+      "threshold": 10.0,
+      "score": 0.023429769302140104,
+      "left": {
+        "count": 235,
+        "positive": 222,
+        "prediction": ">50K",
+        "depth": 2
+      },
+      "right": {
+        "count": 620,
+        "positive": 618,
+        "prediction": ">50K",
+        "depth": 2,
+        "feature": "age",
+        "threshold": 55.0,
+        "score": 0.009851518680207616,
+        "left": {
+          "count": 490,
+          "positive": 490,
+          "prediction": ">50K",
+          "depth": 3
+        },
+        "right": {
+          "count": 130,
+          "positive": 128,
+          "prediction": ">50K",
+          "depth": 3
+        }
+      }
+    }
+  }
+}

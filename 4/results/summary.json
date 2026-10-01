@@ -1,0 +1,489 @@
+{
+  "seed": 42,
+  "train_share": 0.8,
+  "comparison_tree_criterion": "gini",
+  "comparison_tree_max_depth": 6,
+  "comparison_tree_min_leaf": 120,
+  "tree_baseline": {
+    "accuracy": 0.8504529402732995,
+    "precision": 0.7981927710843374,
+    "recall": 0.5070153061224489,
+    "f1": 0.6201248049921997
+  },
+  "forests": [
+    {
+      "technique": "random_forest",
+      "n_estimators": 50,
+      "max_depth": 12,
+      "min_leaf": 10,
+      "max_features": "sqrt",
+      "train_share": 0.8,
+      "train_count": 26048,
+      "test_count": 6513,
+      "quality": {
+        "accuracy": 0.8576692768309535,
+        "precision": 0.7937671860678277,
+        "recall": 0.5522959183673469,
+        "f1": 0.6513726965024446
+      },
+      "feature_importance": [
+        [
+          "marital-status=Married-civ-spouse",
+          0.1579474451434678
+        ],
+        [
+          "capital-gain",
+          0.14113744817852164
+        ],
+        [
+          "education-num",
+          0.1264670589461115
+        ],
+        [
+          "relationship=Husband",
+          0.09360188049314878
+        ],
+        [
+          "age",
+          0.06615848281426326
+        ],
+        [
+          "marital-status=Never-married",
+          0.05673810291290107
+        ],
+        [
+          "hours-per-week",
+          0.03897610410256633
+        ],
+        [
+          "capital-loss",
+          0.030402004841764606
+        ],
+        [
+          "occupation=Exec-managerial",
+          0.027055495576423755
+        ],
+        [
+          "education=Bachelors",
+          0.025534684343315184
+        ],
+        [
+          "sex=Female",
+          0.022675804660371224
+        ],
+        [
+          "sex=Male",
+          0.021161530189943666
+        ],
+        [
+          "relationship=Own-child",
+          0.01778912577860047
+        ],
+        [
+          "occupation=Prof-specialty",
+          0.017757008696556508
+        ],
+        [
+          "relationship=Not-in-family",
+          0.01773535986091328
+        ]
+      ],
+      "seconds": 0.4894070829999999
+    },
+    {
+      "technique": "random_forest",
+      "n_estimators": 60,
+      "max_depth": 12,
+      "min_leaf": 10,
+      "max_features": "sqrt",
+      "train_share": 0.8,
+      "train_count": 26048,
+      "test_count": 6513,
+      "quality": {
+        "accuracy": 0.8581298940580377,
+        "precision": 0.7948717948717948,
+        "recall": 0.5535714285714286,
+        "f1": 0.6526315789473685
+      },
+      "feature_importance": [
+        [
+          "marital-status=Married-civ-spouse",
+          0.1661876540063898
+        ],
+        [
+          "capital-gain",
+          0.151651419784523
+        ],
+        [
+          "education-num",
+          0.1241153157625468
+        ],
+        [
+          "relationship=Husband",
+          0.09216615331651906
+        ],
+        [
+          "age",
+          0.06399074778371114
+        ],
+        [
+          "marital-status=Never-married",
+          0.0535267823931757
+        ],
+        [
+          "hours-per-week",
+          0.03546325417665515
+        ],
+        [
+          "capital-loss",
+          0.030105673360694786
+        ],
+        [
+          "occupation=Exec-managerial",
+          0.028404061026275598
+        ],
+        [
+          "education=Bachelors",
+          0.0246401557771628
+        ],
+        [
+          "sex=Female",
+          0.021107991546513116
+        ],
+        [
+          "occupation=Prof-specialty",
+          0.01980528128697757
+        ],
+        [
+          "sex=Male",
+          0.018765713085398865
+        ],
+        [
+          "relationship=Not-in-family",
+          0.01709757068294946
+        ],
+        [
+          "relationship=Own-child",
+          0.016904220057186746
+        ]
+      ],
+      "seconds": 0.501796042
+    },
+    {
+      "technique": "random_forest",
+      "n_estimators": 70,
+      "max_depth": 12,
+      "min_leaf": 10,
+      "max_features": "sqrt",
+      "train_share": 0.8,
+      "train_count": 26048,
+      "test_count": 6513,
+      "quality": {
+        "accuracy": 0.8582834331337326,
+        "precision": 0.7945205479452054,
+        "recall": 0.5548469387755102,
+        "f1": 0.6533984228313932
+      },
+      "feature_importance": [
+        [
+          "marital-status=Married-civ-spouse",
+          0.15610240559306937
+        ],
+        [
+          "capital-gain",
+          0.15264946085473585
+        ],
+        [
+          "education-num",
+          0.12037208307243084
+        ],
+        [
+          "relationship=Husband",
+          0.0967433168631438
+        ],
+        [
+          "age",
+          0.06617103375216106
+        ],
+        [
+          "marital-status=Never-married",
+          0.04943709410463359
+        ],
+        [
+          "hours-per-week",
+          0.037369204204181515
+        ],
+        [
+          "capital-loss",
+          0.03121637028644308
+        ],
+        [
+          "occupation=Exec-managerial",
+          0.02835157422827576
+        ],
+        [
+          "education=Bachelors",
+          0.026062345798308694
+        ],
+        [
+          "relationship=Not-in-family",
+          0.020638481856468213
+        ],
+        [
+          "sex=Male",
+          0.020057693168373445
+        ],
+        [
+          "relationship=Own-child",
+          0.019902323856361887
+        ],
+        [
+          "sex=Female",
+          0.01831697665676218
+        ],
+        [
+          "occupation=Prof-specialty",
+          0.01828941874377183
+        ]
+      ],
+      "seconds": 0.4879067090000002
+    },
+    {
+      "technique": "random_forest",
+      "n_estimators": 80,
+      "max_depth": 12,
+      "min_leaf": 10,
+      "max_features": "sqrt",
+      "train_share": 0.8,
+      "train_count": 26048,
+      "test_count": 6513,
+      "quality": {
+        "accuracy": 0.8578228159066482,
+        "precision": 0.7950367647058824,
+        "recall": 0.5516581632653061,
+        "f1": 0.651355421686747
+      },
+      "feature_importance": [
+        [
+          "marital-status=Married-civ-spouse",
+          0.15164488169751783
+        ],
+        [
+          "capital-gain",
+          0.1495775414620367
+        ],
+        [
+          "education-num",
+          0.11931476801855631
+        ],
+        [
+          "relationship=Husband",
+          0.09781805599889425
+        ],
+        [
+          "age",
+          0.06915953702062166
+        ],
+        [
+          "marital-status=Never-married",
+          0.05120452063170257
+        ],
+        [
+          "hours-per-week",
+          0.03745641401289268
+        ],
+        [
+          "capital-loss",
+          0.029366991442648573
+        ],
+        [
+          "occupation=Exec-managerial",
+          0.028620408665088935
+        ],
+        [
+          "education=Bachelors",
+          0.02452859621253509
+        ],
+        [
+          "relationship=Not-in-family",
+          0.02115333896938009
+        ],
+        [
+          "occupation=Prof-specialty",
+          0.021064427750315858
+        ],
+        [
+          "sex=Female",
+          0.019670271721477967
+        ],
+        [
+          "relationship=Own-child",
+          0.01916933639857179
+        ],
+        [
+          "sex=Male",
+          0.019145545953136743
+        ]
+      ],
+      "seconds": 0.489968041
+    },
+    {
+      "technique": "random_forest",
+      "n_estimators": 90,
+      "max_depth": 12,
+      "min_leaf": 10,
+      "max_features": "sqrt",
+      "train_share": 0.8,
+      "train_count": 26048,
+      "test_count": 6513,
+      "quality": {
+        "accuracy": 0.857976354982343,
+        "precision": 0.7936073059360731,
+        "recall": 0.5542091836734694,
+        "f1": 0.652647390161472
+      },
+      "feature_importance": [
+        [
+          "marital-status=Married-civ-spouse",
+          0.14637560833544536
+        ],
+        [
+          "capital-gain",
+          0.14519459162185075
+        ],
+        [
+          "education-num",
+          0.11913532588198038
+        ],
+        [
+          "relationship=Husband",
+          0.1039524238271875
+        ],
+        [
+          "age",
+          0.07200877286894053
+        ],
+        [
+          "marital-status=Never-married",
+          0.04795892070525977
+        ],
+        [
+          "hours-per-week",
+          0.037420952747157406
+        ],
+        [
+          "occupation=Exec-managerial",
+          0.030041481196384733
+        ],
+        [
+          "capital-loss",
+          0.029513239779762095
+        ],
+        [
+          "relationship=Not-in-family",
+          0.024056398544047668
+        ],
+        [
+          "education=Bachelors",
+          0.023878705266029854
+        ],
+        [
+          "occupation=Prof-specialty",
+          0.02109611739323316
+        ],
+        [
+          "sex=Female",
+          0.020035008226952734
+        ],
+        [
+          "relationship=Own-child",
+          0.019656024765000505
+        ],
+        [
+          "education=Masters",
+          0.017582655569611503
+        ]
+      ],
+      "seconds": 0.5480972500000001
+    },
+    {
+      "technique": "random_forest",
+      "n_estimators": 100,
+      "max_depth": 12,
+      "min_leaf": 10,
+      "max_features": "sqrt",
+      "train_share": 0.8,
+      "train_count": 26048,
+      "test_count": 6513,
+      "quality": {
+        "accuracy": 0.8581298940580377,
+        "precision": 0.7932604735883424,
+        "recall": 0.5554846938775511,
+        "f1": 0.6534133533383346
+      },
+      "feature_importance": [
+        [
+          "marital-status=Married-civ-spouse",
+          0.15311550942872632
+        ],
+        [
+          "capital-gain",
+          0.14913888917987098
+        ],
+        [
+          "education-num",
+          0.11660055240803006
+        ],
+        [
+          "relationship=Husband",
+          0.09673821148359937
+        ],
+        [
+          "age",
+          0.07090958697206862
+        ],
+        [
+          "marital-status=Never-married",
+          0.04824971926864743
+        ],
+        [
+          "hours-per-week",
+          0.03748096537404515
+        ],
+        [
+          "capital-loss",
+          0.029719317047145435
+        ],
+        [
+          "occupation=Exec-managerial",
+          0.029124447074195956
+        ],
+        [
+          "education=Bachelors",
+          0.02505598094972026
+        ],
+        [
+          "relationship=Not-in-family",
+          0.023895129325377136
+        ],
+        [
+          "occupation=Prof-specialty",
+          0.023149679621603254
+        ],
+        [
+          "relationship=Own-child",
+          0.019901082040376588
+        ],
+        [
+          "sex=Female",
+          0.018806254877672596
+        ],
+        [
+          "sex=Male",
+          0.017429955880629015
+        ]
+      ],
+      "seconds": 0.5532381670000004
+    }
+  ]
+}
